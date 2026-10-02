@@ -1,0 +1,13 @@
+# WordPress environment & temporary files
+*.log
+wp-content/upgrade/
+wp-content/cache/
+wp-content/wflogs/
+wp-content/ai1wm-backups/*.wpress
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
