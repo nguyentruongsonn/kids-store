@@ -29,7 +29,7 @@ define( 'DB_USER', 'root' );
 define( 'DB_PASSWORD', '' );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', '127.0.0.1' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
@@ -86,6 +86,12 @@ $table_prefix = 'wp_';
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
 define( 'WP_DEBUG', false );
+
+/**
+ * This local site has a backlog of WooCommerce scheduled actions that includes
+ * remote requests. Do not execute the queue during a visitor request.
+ */
+define( 'DISABLE_WP_CRON', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 

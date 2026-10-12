@@ -1,0 +1,67 @@
+.cung-google-login {
+    width: 100%;
+    margin: 0;
+}
+.cung-google-login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: #6b6265;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.cung-google-login-divider::before,
+.cung-google-login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e6dfe1;
+}
+.cung-google-login div.nsl-container {
+    padding: 0;
+    margin: 0;
+}
+.cung-google-login div.nsl-container .nsl-container-buttons {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    padding: 0;
+}
+.cung-google-login div.nsl-container .nsl-container-buttons a[data-plugin="nsl"] {
+    display: block;
+    width: 100%;
+    margin: 0;
+    border-radius: 6px;
+}
+.cung-google-login div.nsl-container .nsl-button-google {
+    min-height: 48px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px #dadce0;
+}
+.cung-google-login div.nsl-container .nsl-button-svg-container {
+    padding: 0;
+}
+.cung-google-login div.nsl-container .nsl-button-default div.nsl-button-label-container {
+    flex: 0 1 auto;
+    margin: 0;
+    padding: 12px 0;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0;
+    white-space: normal;
+}
+.cung-google-login .nsl-button-label-container b {
+    font-weight: 600;
+}
+.cung-google-login a[data-plugin="nsl"]:hover {
+    filter: brightness(.97);
+}
+.cung-google-login a[data-plugin="nsl"]:focus-visible {
+    outline: 2px solid var(--theme-palette-color-1, #a94f65);
+    outline-offset: 3px;
+}
