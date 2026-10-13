@@ -1,617 +1,536 @@
 /**
- * Cưng Store Elementor Widgets - Responsive Stylesheet
- * Brand colors: #A94F65 (Rose Burgundy), #3C2D31 (Dark), #F8F5F0 (Warm Cream)
+ * Cưng Store - Blocksy Native Unified Stylesheet
+ * Strictly built around Blocksy theme design tokens and WooCommerce components.
  */
 
-:root {
-  --cung-primary: #A94F65;
-  --cung-primary-hover: #8F3F54;
-  --cung-primary-light: #F2E5E4;
-  --cung-text-dark: #3C2D31;
-  --cung-text-muted: #66585B;
-  --cung-border: #E5DFD7;
-  --cung-border-accent: #EADBDF;
-  --cung-bg-card: #FFFDF9;
-  --cung-radius-sm: 4px;
-  --cung-radius: 6px;
-  --cung-radius-lg: 8px;
-}
-
-/* Base resets inside widgets */
+/* ==========================================================================
+   1. GLOBAL & COMMON RESETS FOR CƯNG WIDGETS
+   ========================================================================== */
 .cung-widget-wrapper {
-  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: var(--cung-text-dark);
+  width: 100%;
   box-sizing: border-box;
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif);
+  color: var(--theme-palette-color-4, #3C2D31);
 }
 
 .cung-widget-wrapper * {
   box-sizing: border-box;
 }
 
-/* ==========================================================================
-   WIDGET 1: DANH MỤC NỔI BẬT (FEATURED CATEGORIES)
-   ========================================================================== */
-.cung-categories-section {
-  padding: 10px 0;
-}
-
+/* Common Section Headers */
 .cung-section-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 24px;
   gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cung-section-title-wrap {
+  flex: 1;
+  min-width: 250px;
 }
 
 .cung-section-title {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif);
   font-size: 22px;
   font-weight: 700;
-  color: var(--cung-text-dark);
-  margin: 0 0 4px 0;
+  color: var(--theme-palette-color-4, #3C2D31);
+  margin: 0 0 6px 0;
   line-height: 1.3;
 }
 
 .cung-section-subtitle {
-  font-size: 13px;
-  color: var(--cung-text-muted);
+  font-size: 14px;
+  color: var(--theme-palette-color-3, #66585B);
   margin: 0;
+  line-height: 1.5;
 }
 
 .cung-view-all-link {
   font-size: 13px;
   font-weight: 600;
-  color: var(--cung-primary);
+  color: var(--theme-palette-color-1, #A94F65);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  transition: all 0.2s ease;
   white-space: nowrap;
-  transition: color 0.2s ease;
 }
 
 .cung-view-all-link:hover {
-  color: var(--cung-primary-hover);
-  text-decoration: underline;
+  color: var(--theme-palette-color-2, #8F3F54);
+  transform: translateX(3px);
 }
 
-/* Category Grid */
+/* ==========================================================================
+   2. WIDGET: DANH MỤC NỔI BẬT (FEATURED CATEGORIES)
+   ========================================================================== */
+.cung-categories-wrapper {
+  padding: 12px 0 28px 0;
+}
+
 .cung-categories-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 16px;
 }
 
-.cung-cat-card {
+.cung-category-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: var(--cung-bg-card);
-  border: 1px solid var(--cung-border);
-  border-radius: var(--cung-radius-lg);
-  padding: 14px 10px;
+  background-color: var(--theme-palette-color-6, #FFFDF9);
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF);
+  border-radius: 8px;
+  padding: 18px 12px 14px 12px;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
-.cung-cat-card:hover {
-  border-color: var(--cung-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(60, 45, 49, 0.06);
+.cung-category-card:hover {
+  border-color: var(--theme-palette-color-1, #A94F65);
+  background-color: var(--theme-palette-color-8, #FFFFFF);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(60, 45, 49, 0.06);
 }
 
-.cung-cat-thumb {
-  width: 80px;
-  height: 80px;
-  border-radius: var(--cung-radius);
+.cung-category-thumb {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
   overflow: hidden;
-  background-color: #F8F5F0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  background-color: var(--theme-palette-color-5, #F8F5F0);
+  margin-bottom: 12px;
+  border: 2px solid var(--theme-palette-color-8, #FFFFFF);
+  box-shadow: 0 2px 8px rgba(60, 45, 49, 0.08);
 }
 
-.cung-cat-thumb img {
+.cung-category-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
-.cung-cat-card:hover .cung-cat-thumb img {
+.cung-category-card:hover .cung-category-thumb img {
   transform: scale(1.08);
 }
 
-.cung-cat-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--cung-text-dark);
-  margin: 0;
-  line-height: 1.3;
+.cung-category-name {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--theme-palette-color-4, #3C2D31);
+  margin: 0 0 4px 0;
+  line-height: 1.35;
   transition: color 0.2s ease;
 }
 
-.cung-cat-card:hover .cung-cat-name {
-  color: var(--cung-primary);
+.cung-category-card:hover .cung-category-name {
+  color: var(--theme-palette-color-1, #A94F65);
 }
 
-.cung-cat-count {
-  font-size: 11px;
-  color: #A8A29E;
-  margin-top: 3px;
+.cung-category-count {
+  font-size: 12px;
+  color: var(--theme-palette-color-3, #66585B);
 }
 
 /* ==========================================================================
-   WIDGET 2: FLASH SALE (GIỜ VÀNG GIÁ SỐC)
+   3. WIDGET: FLASH SALE / GIỜ VÀNG CHO BÉ
    ========================================================================== */
-.cung-flashsale-box {
-  background-color: #FFFFFF;
-  border: 2px solid var(--cung-border-accent);
-  border-radius: 10px;
-  padding: 22px;
-  box-shadow: 0 4px 16px rgba(169, 79, 101, 0.05);
+.cung-flashsale-wrapper {
+  background: linear-gradient(135deg, rgba(248, 245, 240, 0.9) 0%, rgba(255, 253, 249, 0.95) 100%);
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px 0 36px 0;
 }
 
 .cung-flashsale-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #F0EBE9;
-  padding-bottom: 16px;
   margin-bottom: 20px;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
+  border-bottom: 1px dashed var(--theme-palette-color-7, #EFE9DF);
+  padding-bottom: 16px;
 }
 
 .cung-flashsale-title-group {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 14px;
 }
 
 .cung-flashsale-badge {
-  background-color: var(--cung-primary);
-  color: #FFFDF9;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--theme-palette-color-1, #A94F65);
+  color: #ffffff;
   font-size: 11px;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: var(--cung-radius-sm);
-  text-transform: uppercase;
+  font-weight: 700;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 20px;
 }
 
-.cung-flashsale-title {
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--cung-text-dark);
-  margin: 0;
+.cung-flashsale-badge svg {
+  animation: cungPulse 1.5s infinite;
 }
 
-/* Countdown */
+@keyframes cungPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.cung-flashsale-action-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .cung-countdown-wrap {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
+  background-color: var(--theme-palette-color-6, #FFFDF9);
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.cung-countdown-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--theme-palette-color-3, #66585B);
+}
+
+.cung-countdown-digits {
+  display: inline-flex;
+  align-items: center;
   gap: 4px;
-  font-family: monospace;
-  font-size: 13px;
-  font-weight: 700;
-  color: #66585B;
-  margin-left: 6px;
 }
 
 .cung-countdown-unit {
-  background-color: #2D2426;
-  color: #FFFFFF;
+  background-color: var(--theme-palette-color-4, #3C2D31);
+  color: #ffffff;
+  font-size: 13px;
   font-weight: 700;
   padding: 3px 6px;
   border-radius: 4px;
-  min-width: 28px;
+  min-width: 24px;
   text-align: center;
-  display: inline-block;
-  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
 }
 
-.cung-flashsale-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+.cung-countdown-sep {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--theme-palette-color-4, #3C2D31);
 }
 
-/* Flash Sale Card */
-.cung-flash-card {
-  position: relative;
-  background-color: #FFFFFF;
-  border: 1px solid var(--cung-border);
-  border-radius: var(--cung-radius-lg);
+/* Flash Sale Products Grid */
+.cung-flashsale-products {
+  margin-bottom: 0 !important;
+}
+
+.cung-flash-card-item {
+  background-color: var(--theme-palette-color-8, #FFFFFF);
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF);
+  border-radius: 8px;
   padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   transition: all 0.25s ease;
 }
 
-.cung-flash-card:hover {
-  border-color: var(--cung-primary);
-  box-shadow: 0 8px 24px rgba(60, 45, 49, 0.08);
+.cung-flash-card-item:hover {
+  border-color: var(--theme-palette-color-1, #A94F65);
+  box-shadow: 0 6px 18px rgba(60, 45, 49, 0.08);
 }
 
-.cung-discount-tag {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: var(--cung-primary);
-  color: #FFFDF9;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 3px 6px;
-  border-radius: var(--cung-radius-sm);
-  z-index: 2;
-}
-
-.cung-product-thumb {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background-color: #F8F5F0;
-  border-radius: var(--cung-radius);
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.cung-product-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.cung-flash-card:hover .cung-product-thumb img {
-  transform: scale(1.05);
-}
-
-.cung-product-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--cung-text-dark);
-  margin: 0 0 6px 0;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.cung-price-wrap {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.cung-price-current {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--cung-primary);
-}
-
-.cung-price-old {
-  font-size: 11px;
-  color: #A8A29E;
-  text-decoration: line-through;
-}
-
-/* Stock progress */
+/* Flash Sale Stock Urgency Progress */
 .cung-progress-wrap {
-  margin-top: 6px;
+  margin: 10px 0 12px 0;
 }
 
 .cung-progress-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 11px;
-  color: var(--cung-text-muted);
   margin-bottom: 4px;
 }
 
+.cung-sold-label {
+  color: var(--theme-palette-color-3, #66585B);
+}
+
 .cung-stock-urgent {
-  color: var(--cung-primary);
-  font-weight: 700;
+  color: var(--theme-palette-color-1, #A94F65);
+  font-weight: 600;
 }
 
 .cung-progress-bar {
   width: 100%;
   height: 6px;
-  background-color: #EFEAE7;
-  border-radius: 999px;
+  background-color: var(--theme-palette-color-5, #F8F5F0);
+  border-radius: 3px;
   overflow: hidden;
 }
 
 .cung-progress-fill {
   height: 100%;
-  background-color: var(--cung-primary);
-  border-radius: 999px;
-  transition: width 0.5s ease;
+  background: linear-gradient(90deg, var(--theme-palette-color-1, #A94F65), var(--theme-palette-color-2, #8F3F54));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.cung-card-action .button {
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background-color: var(--theme-palette-color-1, #A94F65);
+  color: #ffffff;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.cung-card-action .button:hover {
+  background-color: var(--theme-palette-color-2, #8F3F54);
+  color: #ffffff;
 }
 
 /* ==========================================================================
-   WIDGET 3: LƯỚI SẢN PHẨM ĐA NĂNG (PRODUCT TABS GRID)
+   4. WIDGET: LƯỚI SẢN PHẨM ĐA NĂNG (TABS)
    ========================================================================== */
-.cung-product-tabs-section {
-  padding: 10px 0;
+.cung-product-tabs-wrapper {
+  padding: 16px 0 36px 0;
 }
 
-.cung-tabs-header-bar {
+.cung-tabs-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1.5px solid var(--cung-border);
   margin-bottom: 24px;
-  flex-wrap: wrap;
   gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cung-tabs-heading-group {
+  flex: 1;
+  min-width: 250px;
 }
 
 .cung-tabs-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .cung-tab-btn {
-  background: none;
-  border: none;
-  padding: 0 0 10px 0;
-  margin-bottom: -1.5px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--cung-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF);
+  background-color: var(--theme-palette-color-6, #FFFDF9);
+  color: var(--theme-palette-color-4, #3C2D31);
   cursor: pointer;
-  border-bottom: 2px solid transparent;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .cung-tab-btn:hover {
-  color: var(--cung-primary);
+  border-color: var(--theme-palette-color-1, #A94F65);
+  color: var(--theme-palette-color-1, #A94F65);
 }
 
 .cung-tab-btn.is-active {
-  color: var(--cung-primary);
-  border-bottom-color: var(--cung-primary);
+  background-color: var(--theme-palette-color-1, #A94F65);
+  border-color: var(--theme-palette-color-1, #A94F65);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(169, 79, 101, 0.25);
 }
 
+/* Tab Panels */
 .cung-tab-panel {
   display: none;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
 }
 
 .cung-tab-panel.is-active {
   display: block;
+  opacity: 1;
 }
 
-/* Tab Product Card */
-.cung-tab-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+.cung-no-products {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--theme-palette-color-3, #66585B);
+  font-size: 14px;
 }
 
-.cung-tab-card {
-  background-color: var(--cung-bg-card);
-  border: 1px solid var(--cung-border);
-  border-radius: var(--cung-radius-lg);
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* Bottom CTA Button */
+.cung-tabs-bottom-action {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.cung-bottom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 28px;
+  border-radius: 8px;
+  background-color: var(--theme-palette-color-6, #FFFDF9);
+  border: 1.5px solid var(--theme-palette-color-1, #A94F65);
+  color: var(--theme-palette-color-1, #A94F65);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
   transition: all 0.25s ease;
 }
 
-.cung-tab-card:hover {
-  border-color: var(--cung-primary);
-  box-shadow: 0 8px 24px rgba(60, 45, 49, 0.08);
-}
-
-.cung-aspect-3-4 {
-  aspect-ratio: 3 / 4;
-}
-
-.cung-tab-card-category {
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #A8A29E;
-  letter-spacing: 0.5px;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.cung-product-size-hint {
-  font-size: 11px;
-  color: var(--cung-text-muted);
-  margin: 3px 0 0 0;
-}
-
-.cung-tab-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 10px;
-  margin-top: 10px;
-  border-top: 1px solid #F3EFEA;
-}
-
-.cung-btn-choose {
-  background-color: var(--cung-primary-light);
-  color: var(--cung-primary);
-  border: none;
-  border-radius: var(--cung-radius-sm);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 14px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cung-btn-choose:hover {
-  background-color: var(--cung-primary);
-  color: #FFFDF9;
+.cung-bottom-btn:hover {
+  background-color: var(--theme-palette-color-1, #A94F65);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(169, 79, 101, 0.2);
 }
 
 /* ==========================================================================
-   RESPONSIVE MEDIA QUERIES (FULL RESPONSIVENESS: TABLET & MOBILE)
+   5. SHOP SIDEBAR POLISH (BLOCKSY NATIVE HARMONY)
    ========================================================================== */
+aside#sidebar .widget_product_categories ul.product-categories {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
-/* Tablet (768px - 1023px) */
-@media (max-width: 1023px) and (min-width: 768px) {
+aside#sidebar .widget_product_categories li.cat-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 9px 12px !important;
+  margin-bottom: 6px !important;
+  border-radius: 6px !important;
+  background-color: var(--theme-palette-color-6, #FFFDF9) !important;
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
+  transition: all 0.2s ease !important;
+}
+
+aside#sidebar .widget_product_categories li.cat-item:hover {
+  background-color: var(--theme-palette-color-5, #F8F5F0) !important;
+  border-color: var(--theme-palette-color-1, #A94F65) !important;
+  transform: translateX(3px) !important;
+}
+
+aside#sidebar .widget_product_categories li.cat-item a {
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+}
+
+aside#sidebar .widget_product_categories li.cat-item .count {
+  background-color: var(--theme-palette-color-5, #F8F5F0) !important;
+  color: var(--theme-palette-color-1, #A94F65) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 2px 8px !important;
+  border-radius: 12px !important;
+}
+
+/* Price Filter Widget */
+aside#sidebar .widget_price_filter .ui-slider-range {
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+}
+
+aside#sidebar .widget_price_filter .ui-slider-handle {
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  border-color: var(--theme-palette-color-8, #FFFFFF) !important;
+}
+
+aside#sidebar .widget_price_filter .button {
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) {
   .cung-categories-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-  .cung-flashsale-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  .cung-tab-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .cung-section-title {
-    font-size: 20px;
   }
 }
 
-/* Mobile (<= 767px) */
-@media (max-width: 767px) {
-  .cung-section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .cung-section-title {
-    font-size: 18px;
-  }
-
-  .cung-section-subtitle {
-    font-size: 12px;
-  }
-
-  /* 2 columns on mobile for clean touch layout */
+@media (max-width: 689px) {
   .cung-categories-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
-  .cung-cat-card {
-    padding: 10px 8px;
+  .cung-category-card {
+    padding: 12px 6px;
   }
 
-  .cung-cat-thumb {
+  .cung-category-thumb {
     width: 64px;
     height: 64px;
+    margin-bottom: 8px;
   }
 
-  .cung-cat-name {
+  .cung-category-name {
     font-size: 12px;
   }
 
-  /* Flash Sale Mobile */
-  .cung-flashsale-box {
-    padding: 14px;
+  .cung-category-count {
+    font-size: 11px;
+  }
+
+  .cung-flashsale-wrapper {
+    padding: 16px;
   }
 
   .cung-flashsale-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    padding-bottom: 12px;
-    margin-bottom: 14px;
   }
 
-  .cung-flashsale-title {
-    font-size: 15px;
+  .cung-flashsale-action-group {
+    width: 100%;
+    justify-content: space-between;
   }
 
-  .cung-flashsale-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .cung-flash-card {
-    padding: 8px;
-  }
-
-  .cung-product-title {
-    font-size: 12px;
-  }
-
-  .cung-price-current {
-    font-size: 13px;
-  }
-
-  .cung-price-old {
-    font-size: 10px;
-  }
-
-  /* Product Tabs Mobile */
-  .cung-tabs-header-bar {
+  .cung-tabs-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
   }
 
   .cung-tabs-nav {
-    display: flex;
-    overflow-x: auto;
     width: 100%;
+    overflow-x: auto;
     padding-bottom: 6px;
-    gap: 16px;
-    scrollbar-width: none;
+    flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
-  }
-
-  .cung-tabs-nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .cung-tab-btn {
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-  .cung-tab-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .cung-tab-card {
-    padding: 10px;
-  }
-
-  .cung-btn-choose {
-    padding: 5px 10px;
-    font-size: 11px;
-  }
-}
-
-/* Extra small devices (<= 380px) */
-@media (max-width: 380px) {
-  .cung-categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  .cung-flashsale-grid,
-  .cung-tab-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
   }
 }

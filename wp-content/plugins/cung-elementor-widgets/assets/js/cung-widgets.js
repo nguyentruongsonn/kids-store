@@ -15,9 +15,8 @@
       var endTimeStr = $this.data('end-time');
       if (!endTimeStr) return;
 
-      var targetDate = new Date(endTimeStr).getTime();
+      var targetDate = new Date(endTimeStr.replace(/-/g, '/')).getTime();
       if (isNaN(targetDate)) {
-        // Fallback: 8 hours from now if invalid
         targetDate = new Date().getTime() + 8 * 60 * 60 * 1000;
       }
 
@@ -36,7 +35,7 @@
           return;
         }
 
-        var hours = Math.floor((distance / (1000 * 60 * 60)));
+        var hours = Math.floor(distance / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -52,7 +51,7 @@
 
   // 2. PRODUCT TABS SWITCHER
   function initTabs($scope) {
-    var $tabSections = $scope ? $scope.find('.cung-product-tabs-section') : $('.cung-product-tabs-section');
+    var $tabSections = $scope ? $scope.find('.cung-product-tabs-wrapper') : $('.cung-product-tabs-wrapper');
 
     $tabSections.each(function () {
       var $section = $(this);
@@ -62,13 +61,13 @@
       $navBtns.on('click', function (e) {
         e.preventDefault();
         var $btn = $(this);
-        var targetTab = $btn.data('target');
+        var targetId = $btn.data('target');
 
-        $navBtns.removeClass('is-active');
-        $btn.addClass('is-active');
+        $navBtns.removeClass('is-active').attr('aria-selected', 'false');
+        $btn.addClass('is-active').attr('aria-selected', 'true');
 
         $panels.removeClass('is-active');
-        $section.find('#' + targetTab).addClass('is-active');
+        $section.find('#' + targetId).addClass('is-active');
       });
     });
   }
