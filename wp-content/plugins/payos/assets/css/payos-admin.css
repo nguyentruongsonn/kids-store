@@ -1,0 +1,146 @@
+/* Trang cài đặt WooCommerce > Thanh toán > payOS */
+
+.payos-connect {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-width: 640px;
+}
+
+.payos-connect__status {
+	padding: 14px 16px;
+	border: 1px solid #c3c4c7;
+	border-left-width: 4px;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.payos-connect__status--on {
+	border-left-color: #00a32a;
+}
+
+.payos-connect__status--off {
+	border-left-color: #d63638;
+}
+
+.payos-connect__status p {
+	margin: 8px 0 0;
+}
+
+.payos-connect__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 600;
+}
+
+.payos-connect__badge::before {
+	content: "";
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #d63638;
+}
+
+.payos-connect__status--on .payos-connect__badge {
+	color: #007017;
+}
+
+.payos-connect__status--on .payos-connect__badge::before {
+	background: #00a32a;
+}
+
+.payos-connect__info {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 6px 24px;
+	margin: 10px 0 0;
+}
+
+.payos-connect__info div {
+	display: flex;
+	gap: 8px;
+}
+
+.payos-connect__info dt {
+	color: #646970;
+	min-width: 110px;
+}
+
+.payos-connect__info dd {
+	margin: 0;
+	font-weight: 600;
+	overflow-wrap: anywhere;
+}
+
+.payos-connect__field label {
+	display: block;
+	margin-bottom: 4px;
+	font-weight: 600;
+}
+
+.payos-connect__copy {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.payos-connect__copy input[type="text"],
+.payos-connect__copy input[type="password"] {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+}
+
+.payos-connect__copy input[readonly] {
+	background: #f6f7f7;
+}
+
+.payos-connect__warning {
+	margin: 8px 0 0 !important;
+}
+
+.payos-connect__keys {
+	padding: 0 16px;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.payos-connect__keys > summary {
+	padding: 12px 0;
+	cursor: pointer;
+	font-weight: 600;
+	color: #2271b1;
+}
+
+.payos-connect__keys[open] > summary {
+	border-bottom: 1px solid #f0f0f1;
+	margin-bottom: 12px;
+}
+
+.payos-connect__keys .payos-connect__field + .payos-connect__field {
+	margin-top: 12px;
+}
+
+.payos-connect__steps {
+	margin: 0 0 16px 18px;
+	color: #50575e;
+}
+
+.payos-connect__steps li {
+	margin-bottom: 4px;
+}
+
+.payos-connect__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 16px;
+	margin: 16px 0;
+}
+
+label#transaction_prefix {
+	font-size: 13px;
+	font-style: oblique;
+}

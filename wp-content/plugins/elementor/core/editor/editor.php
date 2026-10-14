@@ -4,8 +4,9 @@ namespace Elementor\Core\Editor;
 use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 use Elementor\Core\Common\Modules\Ajax\Module;
 use Elementor\Core\Debug\Loading_Inspection_Manager;
-use Elementor\Core\Editor\Loader\Editor_Loader_Factory;
-use Elementor\Core\Editor\Loader\Editor_Loader_Interface;
+use Elementor\Core\Editor\Loader\Editor_Loader;
+use Elementor\Core\Utils\Assets_Config_Provider;
+use Elementor\Core\Utils\Collection;
 use Elementor\Core\Settings\Manager as SettingsManager;
 use Elementor\Plugin;
 use Elementor\TemplateLibrary\Source_Local;
@@ -66,7 +67,7 @@ class Editor {
 	public $promotion;
 
 	/**
-	 * @var Editor_Loader_Interface
+	 * @var Editor_Loader
 	 */
 	private $loader;
 
@@ -118,6 +119,9 @@ class Editor {
 		@header( 'Content-Type: ' . get_option( 'html_type' ) . '; charset=' . get_option( 'blog_charset' ) );
 
 		self::send_document_isolation_policy_header();
+
+		// Keep the editor media modal on the classic uploader on WP 7.2+.
+		add_action( 'wp_enqueue_media', [ $this, 'dequeue_media_frame_upload_script' ] );
 
 		add_filter( 'show_admin_bar', '__return_false' );
 
@@ -209,6 +213,65 @@ class Editor {
 
 		wp_safe_redirect( $document->get_edit_url() );
 		die;
+	}
+
+	/**
+	 * Whether the current request targets the Elementor editor.
+	 *
+	 * Unlike `is_edit_mode()`, this is not affected by temporary `set_edit_mode()` overrides.
+	 *
+	 * @since 4.1.0
+	 * @access public
+	 *
+	 * @return bool Whether the current request targets the Elementor editor.
+	 */
+	public function is_editor_request() {
+		$common = Plugin::$instance->common;
+
+		if ( $common ) {
+			/** @var Module ajax */
+			$ajax_data = $common->get_component( 'ajax' )->get_current_action_data();
+
+			if ( ! empty( $ajax_data ) && 'get_document_config' === $ajax_data['action'] ) {
+				return true;
+			}
+		}
+
+		if ( $this->is_editor_admin_screen() ) {
+			return true;
+		}
+
+		return $this->is_editor_ajax_request();
+	}
+
+	private function is_editor_admin_screen(): bool {
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return false;
+		}
+
+		$screen = get_current_screen();
+
+		if ( ! $screen ) {
+			return false;
+		}
+
+		return isset( $_GET['action'] ) && 'elementor' === $_GET['action'] && in_array( $screen->base, [ 'post', 'toplevel_page_elementor' ], true );
+	}
+
+	private function is_editor_ajax_request(): bool {
+		$actions = apply_filters( 'elementor/editor/ajax_actions', [
+			'elementor',
+
+			// Templates
+			'elementor_get_templates',
+			'elementor_save_template',
+			'elementor_get_template',
+			'elementor_delete_template',
+			'elementor_import_template',
+			'elementor_library_direct_actions',
+		] );
+
+		return isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], $actions, true );
 	}
 
 	/**
@@ -603,6 +666,13 @@ class Editor {
 	}
 
 	/**
+	 * @since 4.5.0
+	 */
+	public function dequeue_media_frame_upload_script() {
+		wp_dequeue_script( 'media-frame-upload' );
+	}
+
+	/**
 	 * Signals to WordPress that Elementor is replacing the block editor on its own editor page,
 	 * so that block-editor-specific behaviour (e.g. WP 7.0 COOP/COEP isolation headers) is not
 	 * applied when the Elementor editor is active.
@@ -661,11 +731,22 @@ class Editor {
 	/**
 	 * Get loader.
 	 *
-	 * @return Editor_Loader_Interface
+	 * @return Editor_Loader
 	 */
 	private function get_loader() {
 		if ( ! $this->loader ) {
-			$this->loader = Editor_Loader_Factory::create();
+			$this->loader = new Editor_Loader(
+				new Collection( [
+					'assets_url' => ELEMENTOR_ASSETS_URL,
+					'min_suffix' => ( Utils::is_script_debug() || Utils::is_elementor_tests() ) ? '' : '.min',
+					'direction_suffix' => is_rtl() ? '-rtl' : '',
+				] ),
+				( new Assets_Config_Provider() )->set_path_resolver(
+					function ( $name ) {
+						return ELEMENTOR_ASSETS_PATH . "js/packages/{$name}/{$name}.asset.php";
+					}
+				)
+			);
 
 			$this->loader->init();
 		}

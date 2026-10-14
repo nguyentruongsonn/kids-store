@@ -295,6 +295,22 @@ class IntegrityHelper
     }
 
     /*
+     * Unexpected folders at the WordPress root the site has not already accepted.
+     *
+     * The folder half of getActiveCoreFindings(), read from the same stored scan. The report
+     * and the findings list both read it here - the list used to leave folders out entirely,
+     * so a site could be told nothing needed attention by the one screen and emailed the same
+     * folders every day by the other.
+     */
+    public static function getActiveCoreFolders()
+    {
+        return array_values(array_diff(
+            (array)Arr::get(self::getCoreResults(), 'folders', []),
+            (array)Arr::get(self::getIgnoreLists(), 'folders', [])
+        ));
+    }
+
+    /*
      * What the last scan found in each plugin and theme, keyed by type and file.
      *
      * Core's findings are kept only in summary - see getCoreResults() - because the screen
@@ -701,6 +717,9 @@ class IntegrityHelper
             'site_url'         => site_url(),
             'admin_url'        => admin_url('admin.php?page=fluent-auth#/'),
             'site_title'       => get_bloginfo('name'),
+            'php_version'      => PHP_VERSION,
+            'wp_version'       => get_bloginfo('version'),
+            'plugin_version'   => FLUENT_AUTH_VERSION,
             'modified_files'   => $modifiedFiles,
             /*
              * Re-indexed on the way out. The relay reads this key only when it is a JSON array,
@@ -869,14 +888,9 @@ class IntegrityHelper
      */
     public static function sendStoredReport()
     {
-        $folders = array_values(array_diff(
-            (array)Arr::get(self::getCoreResults(), 'folders', []),
-            (array)Arr::get(self::getIgnoreLists(), 'folders', [])
-        ));
-
         $payload = self::buildReportPayload(
             array_merge(self::getActiveCoreFindings(), self::getActiveExtensionFindings()),
-            $folders,
+            self::getActiveCoreFolders(),
             self::getSuspiciousExtensions()
         );
 

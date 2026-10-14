@@ -2,9 +2,10 @@
 
 namespace FluentForm\App\Services\FormBuilder\Notifications;
 
-defined('ABSPATH') or die;
+defined('ABSPATH') || die;
 
 use FluentForm\App\Helpers\Helper;
+use FluentForm\App\Modules\Form\FormFieldsParser;
 use FluentForm\App\Services\FormBuilder\ShortCodeParser;
 use FluentForm\Framework\Foundation\Application;
 use FluentForm\Framework\Helpers\ArrayHelper;
@@ -33,8 +34,21 @@ class EmailNotificationActions
         add_action('fluentform/notify_on_form_submit', [$this, 'notifyOnSubmitPaymentForm'], 10, 3);
     }
 
+    /**
+     * Send the on-submit email notifications for a payment form.
+     *
+     * @param int $submissionId
+     * @param array $submissionData
+     * @param \FluentForm\App\Models\Form|\stdClass $form
+     * @return void
+     */
     public function notifyOnSubmitPaymentForm($submissionId, $submissionData, $form)
     {
+        // Without has_payment the global notifier sends payment_form_submit feeds itself.
+        if (empty($form->has_payment)) {
+            return;
+        }
+
         $emailFeeds = wpFluent()->table('fluentform_form_meta')
             ->where('form_id', $form->id)
             ->where('meta_key', 'notifications')
@@ -45,7 +59,7 @@ class EmailNotificationActions
         }
 
         $formData = $this->getFormData($submissionId);
-        $notificationManager = new  \FluentForm\App\Services\Integrations\GlobalNotificationManager(wpFluentForm());
+        $notificationManager = new \FluentForm\App\Services\Integrations\GlobalNotificationManager(wpFluentForm());
 
         $activeEmailFeeds = $notificationManager->getEnabledFeeds($emailFeeds, $formData, $submissionId);
         if (! $activeEmailFeeds) {
@@ -84,10 +98,16 @@ class EmailNotificationActions
 
     public function notify($feed, $formData, $entry, $form)
     {
-        // A payment_success email asserts a settled charge, so gate it on the payment status
-        // for every payment form -- not only those with a Payment Method field.
+        // A payment_success email asserts a settled charge, so gate it on the payment status.
+        // Only a form with a Payment Method field can settle one; without it every entry stays
+        // pending and the editor hides the trigger, so its notifications go out on submit.
         $isTriggerOnPaymentSuccess = ArrayHelper::get($feed, 'processedValues.feed_trigger_event') === 'payment_success';
-        if (!empty($form->has_payment) && $isTriggerOnPaymentSuccess && !$this->paymentSucceeded($entry, $form)) {
+        if (
+            !empty($form->has_payment)
+            && $isTriggerOnPaymentSuccess
+            && FormFieldsParser::hasElement($form, 'payment_method')
+            && !$this->paymentSucceeded($entry, $form)
+        ) {
             return;
         }
 
@@ -125,6 +145,8 @@ class EmailNotificationActions
     }
 
     /**
+     * Resolve the local files to attach to a notification email.
+     *
      * @param $emailData
      * @param $formData
      * @param $entry
@@ -139,16 +161,31 @@ class EmailNotificationActions
         $uploadDir = wp_upload_dir();
 
         if (!empty($emailData['attachments']) && is_array($emailData['attachments'])) {
-            $attachments = [];
+            $candidates = [];
             foreach ($emailData['attachments'] as $name) {
                 $fileUrls = ArrayHelper::get($formData, $name);
                 if ($fileUrls && is_array($fileUrls)) {
                     foreach ($fileUrls as $url) {
                         $filePath = $this->resolveUploadAttachmentPath($url, $uploadDir);
                         if ($filePath) {
-                            $attachments[] = $filePath;
+                            $candidates[$filePath] = basename($filePath);
                         }
                     }
+                }
+            }
+
+            $attachments = [];
+            if ($candidates) {
+                $referencedElsewhere = Helper::getFilesReferencedByOtherSubmissions(
+                    array_values($candidates), [$entry->id]
+                );
+                foreach ($candidates as $filePath => $fileName) {
+                    // A submitter-controlled field value can name another entry's
+                    // upload, so only attach a file no other submission references.
+                    if (isset($referencedElsewhere[$fileName])) {
+                        continue;
+                    }
+                    $attachments[] = $filePath;
                 }
             }
             $emailAttachments = $attachments;
@@ -165,7 +202,7 @@ class EmailNotificationActions
             }
             $emailAttachments = array_merge($emailAttachments, $attachments);
         }
-    
+
         $emailAttachments = apply_filters_deprecated(
             'fluentform_email_attachments',
             [
@@ -173,7 +210,7 @@ class EmailNotificationActions
                 $emailData,
                 $formData,
                 $entry,
-                $form
+                $form,
             ],
             FLUENTFORM_FRAMEWORK_UPGRADE,
             'fluentform/email_attachments',

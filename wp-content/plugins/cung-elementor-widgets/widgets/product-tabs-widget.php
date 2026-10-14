@@ -51,7 +51,7 @@ class Cung_Product_Tabs_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Mô tả phụ', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Chất liệu thoáng mát, thiết kế êm dịu nâng niu làn da bé', 'cung-widgets'),
+                'default' => '',
                 'label_block' => true,
             ]
         );
@@ -72,7 +72,7 @@ class Cung_Product_Tabs_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Chữ nút dưới cùng', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Xem tất cả sản phẩm tại Cưng Store →', 'cung-widgets'),
+                'default' => esc_html__('Xem tất cả sản phẩm tại Cưng Store', 'cung-widgets'),
                 'label_block' => true,
             ]
         );

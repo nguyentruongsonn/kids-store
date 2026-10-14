@@ -2,7 +2,7 @@
 
 namespace FluentForm\App\Services\FormBuilder\Components;
 
-defined('ABSPATH') or die;
+defined('ABSPATH') || die;
 
 use FluentForm\App\Helpers\Helper;
 use FluentForm\Framework\Helpers\ArrayHelper;
@@ -22,23 +22,23 @@ class SubmitButton extends BaseComponent
         $maybeHide = apply_filters_deprecated(
             'fluentform_is_hide_submit_btn_' . $form->id,
             [
-                false
+                false,
             ],
             FLUENTFORM_FRAMEWORK_UPGRADE,
             'fluentform/is_hide_submit_btn_' . $form->id,
-            'Use fluentform/is_hide_submit_btn_' . $form->id. ' instead of fluentform_is_hide_submit_btn_' . $form->id
+            'Use fluentform/is_hide_submit_btn_' . $form->id . ' instead of fluentform_is_hide_submit_btn_' . $form->id
         );
         if (apply_filters('fluentform/is_hide_submit_btn_' . $form->id, $maybeHide)) {
             return '';
         }
 
         $elementName = $data['element'];
-    
+
         $data = apply_filters_deprecated(
             'fluentform_rendering_field_data_' . $elementName,
             [
                 $data,
-                $form
+                $form,
             ],
             FLUENTFORM_FRAMEWORK_UPGRADE,
             'fluentform/rendering_field_data_' . $elementName,
@@ -48,14 +48,14 @@ class SubmitButton extends BaseComponent
         $data = apply_filters('fluentform/rendering_field_data_' . $elementName, $data, $form);
 
         $btnStyle = ArrayHelper::get($data['settings'], 'button_style');
-        
+
         /* This filter is deprecated and will be removed soon */
         $noStyle = apply_filters('fluentform_submit_button_force_no_style', false);
-        
+
         if (apply_filters('fluentform/submit_button_force_no_style', $noStyle)) {
             $btnStyle = 'no_style';
         }
-        
+
         $btnSize = 'ff-btn-';
         $btnSize .= isset($data['settings']['button_size']) ? $data['settings']['button_size'] : 'md';
         $oldBtnType = isset($data['settings']['button_style']) ? '' : ' ff-btn-primary ';
@@ -64,11 +64,11 @@ class SubmitButton extends BaseComponent
             'ff-btn ff-btn-submit',
             $oldBtnType,
             $btnSize,
-            $data['attributes']['class'],
+            ArrayHelper::get($data, 'attributes.class', ''),
         ];
-        
-        $loadDefaultFluentStyle = $form->theme != 'ffs_inherit_theme';
-        if(!$loadDefaultFluentStyle){
+
+        $loadDefaultFluentStyle = 'ffs_inherit_theme' != $form->theme;
+        if (!$loadDefaultFluentStyle) {
             $btnStyle = 'no_style';
         }
         if ('no_style' == $btnStyle) {
@@ -77,7 +77,7 @@ class SubmitButton extends BaseComponent
             $btnClasses[] = 'ff_btn_style';
         }
 
-        $align = 'ff-el-group ff-text-' . @$data['settings']['align'];
+        $align = 'ff-el-group ff-text-' . ArrayHelper::get($data, 'settings.align', '');
         $data['attributes']['class'] = trim(implode(' ', array_filter($btnClasses)));
 
         if ($tabIndex = Helper::getNextTabIndex()) {
@@ -119,12 +119,12 @@ class SubmitButton extends BaseComponent
             }
         } elseif ('no_style' != $btnStyle) {
             $bgColor = esc_attr(ArrayHelper::get($data, 'settings.background_color'));
-            $bgColor = str_replace('#1a7efb','var(--fluentform-primary)',$bgColor);
+            $bgColor = str_replace('#1a7efb', 'var(--fluentform-primary)', $bgColor);
             $styles .= 'form.fluent_form_' . $form->id . ' .ff-btn-submit:not(.ff_btn_no_style) { background-color: ' . $bgColor . '; color: ' . esc_attr(ArrayHelper::get($data, 'settings.color')) . '; }';
         }
 
         $atts = $this->buildAttributes($data['attributes']);
-        $cls = trim($align . ' ' . $data['settings']['container_class']);
+        $cls = trim($align . ' ' . ArrayHelper::get($data, 'settings.container_class', ''));
 
         $html = "<div class='" . esc_attr($cls) . " ff_submit_btn_wrapper'>";
 
@@ -141,28 +141,15 @@ class SubmitButton extends BaseComponent
             $html .= '<button ' . $atts . ' aria-label="' . esc_attr($this->removeShortcode($buttonText)) . '">' . fluentform_sanitize_html($buttonText) . '</button>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $atts is escaped before being passed in.
         }
 
-        // SECURITY (FINDING-12): the custom-button style map keys and values are user-controlled
-        // and unsanitized at save; a value like "#fff}</style><script>..." would break out of the
-        // <style> element. fluentformSanitizeCSS() blanks any CSS containing a tag pattern.
-        $styles = fluentformSanitizeCSS($styles);
-        if ($styles) {
-            if (did_action('wp_footer') || Helper::isBlockEditor()) {
-                $html .= '<style>' . $styles . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $styles is sanitized via fluentformSanitizeCSS().
-            } else {
-                add_action('wp_footer', function () use ($styles) {
-                    echo '<style>' . $styles . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $styles is sanitized via fluentformSanitizeCSS().
-                });
-            }
-        }
-
         $html .= '</div>';
-    
+        $html = $this->buildInlineStyleContainer($styles) . $html;
+
         $html = apply_filters_deprecated(
             'fluentform_rendering_field_html_' . $elementName,
             [
                 $html,
                 $data,
-                $form
+                $form,
             ],
             FLUENTFORM_FRAMEWORK_UPGRADE,
             'fluentform/rendering_field_html_' . $elementName,

@@ -51,7 +51,7 @@ class Cung_Categories_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Mô tả phụ', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Các bộ sưu tập quần áo chất liệu tự nhiên được yêu thích nhất', 'cung-widgets'),
+                'default' => '',
                 'label_block' => true,
             ]
         );
@@ -61,7 +61,7 @@ class Cung_Categories_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Chữ nút "Xem tất cả"', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Tất cả danh mục →', 'cung-widgets'),
+                'default' => esc_html__('Tất cả danh mục', 'cung-widgets'),
             ]
         );
 

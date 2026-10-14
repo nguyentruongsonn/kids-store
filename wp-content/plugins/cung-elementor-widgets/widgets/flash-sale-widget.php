@@ -51,7 +51,7 @@ class Cung_Flash_Sale_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Mô tả phụ', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Ưu đãi số lượng có hạn cho bé yêu trong ngày hôm nay', 'cung-widgets'),
+                'default' => '',
                 'label_block' => true,
             ]
         );
@@ -82,7 +82,7 @@ class Cung_Flash_Sale_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Chữ nút "Xem tất cả"', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Xem toàn bộ Flash Sale →', 'cung-widgets'),
+                'default' => esc_html__('Xem toàn bộ Flash Sale', 'cung-widgets'),
             ]
         );
 

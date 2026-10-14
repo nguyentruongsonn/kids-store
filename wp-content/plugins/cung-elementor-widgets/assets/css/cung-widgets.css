@@ -48,21 +48,36 @@
   line-height: 1.5;
 }
 
-.cung-view-all-link {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--theme-palette-color-1, #A94F65);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+.cung-view-all-link,
+.elementor-element-4fa9448 .elementor-button,
+.elementor-element-71dcc2b .elementor-button {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--theme-palette-color-1, #8F3F54) !important;
+  background-color: #F2E5E4 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 8px !important;
+  padding: 8px 20px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1.4 !important;
+  transition: all 0.25s ease !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
 }
 
-.cung-view-all-link:hover {
-  color: var(--theme-palette-color-2, #8F3F54);
-  transform: translateX(3px);
+.cung-view-all-link:hover,
+.elementor-element-4fa9448 .elementor-button:hover,
+.elementor-element-71dcc2b .elementor-button:hover {
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #ffffff !important;
+  border: none !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(169, 79, 101, 0.2) !important;
 }
 
 /* ==========================================================================
@@ -380,6 +395,98 @@
   opacity: 1;
 }
 
+/* 4-column Desktop Grid for Product Tabs */
+.cung-product-tabs-wrapper ul.products {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.cung-product-tabs-wrapper ul.products::before,
+.cung-product-tabs-wrapper ul.products::after {
+  display: none !important;
+}
+
+.cung-product-tabs-wrapper ul.products li.product {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  float: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: var(--theme-palette-color-8, #FFFFFF);
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF);
+  border-radius: 8px;
+  padding: 12px;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.cung-product-tabs-wrapper ul.products li.product:hover,
+ul.products li.product:hover {
+  border-color: transparent !important;
+  box-shadow: 0 10px 24px rgba(60, 45, 49, 0.1) !important;
+  transform: translateY(-3px);
+}
+
+/* High Contrast, Solid, Non-Blurry Add to Cart Button */
+.cung-product-tabs-wrapper ul.products li.product .button,
+.cung-product-tabs-wrapper ul.products li.product .add_to_cart_button,
+.woocommerce ul.products li.product .button.add_to_cart_button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #ffffff !important;
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  padding: 10px 16px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  box-shadow: 0 2px 8px rgba(169, 79, 101, 0.22) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  margin-top: auto !important;
+}
+
+.cung-product-tabs-wrapper ul.products li.product .button:hover,
+.cung-product-tabs-wrapper ul.products li.product .add_to_cart_button:hover,
+.woocommerce ul.products li.product .button.add_to_cart_button:hover {
+  background-color: var(--theme-palette-color-2, #8F3F54) !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  box-shadow: 0 4px 14px rgba(143, 63, 84, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Product Card Elements Polish */
+.cung-product-tabs-wrapper ul.products li.product .woocommerce-loop-product__title {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  margin: 10px 0 6px 0 !important;
+  line-height: 1.4 !important;
+}
+
+.cung-product-tabs-wrapper ul.products li.product .price {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--theme-palette-color-1, #A94F65) !important;
+  margin-bottom: 10px !important;
+}
+
 .cung-no-products {
   text-align: center;
   padding: 40px 20px;
@@ -481,12 +588,22 @@ aside#sidebar .widget_price_filter .button {
   .cung-categories-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .cung-product-tabs-wrapper ul.products {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
 }
 
 @media (max-width: 689px) {
   .cung-categories-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+  }
+
+  .cung-product-tabs-wrapper ul.products {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
   }
 
   .cung-category-card {
@@ -532,5 +649,200 @@ aside#sidebar .widget_price_filter .button {
     padding-bottom: 6px;
     flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 420px) {
+  .cung-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .cung-product-tabs-wrapper ul.products {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* ==========================================================================
+   7. UNIVERSAL BUTTON HARMONY (8PX BORDER-RADIUS)
+   ========================================================================== */
+.elementor-button,
+.elementor-button-link,
+.cung-bottom-btn,
+.cung-view-all-link,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit,
+.ct-button {
+  border-radius: 8px !important;
+}
+
+/* ==========================================================================
+   8. NEWS / BLOG SECTION POLISH (BLOCKSY NATIVE HARMONY)
+   ========================================================================== */
+/* News Header Container (fbf944b) */
+.elementor-element.elementor-element-fbf944b {
+  margin-bottom: 24px !important;
+  align-items: flex-end !important;
+}
+
+.elementor-element.elementor-element-fbf944b .elementor-heading-title {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  line-height: 1.3 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* News Posts Grid Container (6c3c1dc) */
+.elementor-element.elementor-element-6c3c1dc {
+  margin-bottom: 80px !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc .entries {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: var(--theme-palette-color-8, #FFFFFF) !important;
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(60, 45, 49, 0.04) !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card:hover {
+  border-color: transparent !important;
+  box-shadow: 0 12px 30px rgba(60, 45, 49, 0.1) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* News Image Container */
+.elementor-element.elementor-element-6c3c1dc article.entry-card .ct-media-container {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  aspect-ratio: 16/10 !important;
+  margin-bottom: 14px !important;
+  display: block !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card .ct-media-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.4s ease !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card:hover .ct-media-container img {
+  transform: scale(1.05) !important;
+}
+
+/* News Category Tag */
+.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] {
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a {
+  display: inline-block !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  color: var(--theme-palette-color-1, #A94F65) !important;
+  background-color: var(--theme-palette-color-5, #F8F5F0) !important;
+  padding: 4px 10px !important;
+  border-radius: 20px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a:hover {
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #ffffff !important;
+}
+
+/* News Title */
+.elementor-element.elementor-element-6c3c1dc article.entry-card h2.entry-title {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.45 !important;
+  margin: 0 0 10px 0 !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card h2.entry-title a {
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card:hover h2.entry-title a {
+  color: var(--theme-palette-color-1, #A94F65) !important;
+}
+
+/* News Excerpt */
+.elementor-element.elementor-element-6c3c1dc article.entry-card .entry-excerpt {
+  margin: 0 0 14px 0 !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card .entry-excerpt p {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  color: var(--theme-palette-color-3, #66585B) !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* News Footer Meta (Date, Comments) */
+.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] {
+  margin-top: auto !important;
+  padding-top: 10px !important;
+  border-top: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  font-size: 12px !important;
+  color: var(--theme-palette-color-3, #8A7B7E) !important;
+}
+
+.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] a {
+  color: var(--theme-palette-color-3, #8A7B7E) !important;
+  text-decoration: none !important;
+}
+
+/* Responsive Media Queries for News */
+@media (max-width: 1024px) {
+  .elementor-element.elementor-element-6c3c1dc .entries {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 689px) {
+  .elementor-element.elementor-element-6c3c1dc .entries {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
 }

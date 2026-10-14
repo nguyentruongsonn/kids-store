@@ -9,9 +9,18 @@ use FluentAuth\App\Services\LoginAssets;
 use FluentAuth\App\Services\LoginBridge;
 use FluentAuth\App\Services\TwoFa\AuthFactor;
 use FluentAuth\App\Services\SystemEmailService;
+use FluentAuth\App\Services\Turnstile;
 
 class CustomAuthHandler
 {
+    /**
+     * The field types the signup form can render. A field of any other type given to
+     * `fluent_auth/registration_form_fields` is left out of the form.
+     *
+     * Public so a plugin adding fields can ask before it relies on one: releases before
+     * this constant existed render text, email and password only.
+     */
+    const SIGNUP_FIELD_TYPES = ['text', 'email', 'password', 'select'];
 
     public function register()
     {
@@ -39,16 +48,18 @@ class CustomAuthHandler
             return $redirect_to;
         }
 
-        // check if we have value from cookie _fls_redirect_to
-        if (isset($_COOKIE['_fls_redirect_to']) && filter_var($_COOKIE['_fls_redirect_to'], FILTER_VALIDATE_URL)) {
-            $redirect_to = sanitize_url($_COOKIE['_fls_redirect_to']);
-            $validatedRedirectUrl = Helper::getValidatedRedirectUrl($redirect_to, admin_url());
-            unset($_COOKIE['_fls_redirect_to']);
-            setcookie('_fls_redirect_to', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
-            if ($validatedRedirectUrl == $redirect_to) {
-                return $redirect_to;
-            }
+        /*
+         * Where a logged-out visitor was headed - see MagicLoginHandler::rememberRedirect().
+         * Anybody can put a link in front of them, so it only counts when it stays on a
+         * host this site trusts. Otherwise it is dropped and the usual rules decide.
+         */
+        if (!empty($_COOKIE['_fls_redirect_to']) && is_string($_COOKIE['_fls_redirect_to'])) {
+            $cookieRedirect = Helper::getValidatedRedirectUrl(sanitize_url(wp_unslash($_COOKIE['_fls_redirect_to'])), '');
+            self::forgetRedirect();
 
+            if ($cookieRedirect) {
+                return $cookieRedirect;
+            }
         }
 
         if (apply_filters('fluent_auth/respect_front_login_url', true) && strpos($redirect_to, '/wp-admin') === false) {
@@ -58,6 +69,29 @@ class CustomAuthHandler
         }
 
         return $redirect_to;
+    }
+
+    /**
+     * Drops the `_fls_redirect_to` cookie once it has been read.
+     *
+     * @return void
+     */
+    private static function forgetRedirect()
+    {
+        unset($_COOKIE['_fls_redirect_to']);
+
+        if (headers_sent()) {
+            return;
+        }
+
+        setcookie('_fls_redirect_to', '', [
+            'expires'  => time() - 3600,
+            'path'     => COOKIEPATH,
+            'domain'   => COOKIE_DOMAIN,
+            'secure'   => is_ssl(),
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
     }
 
     public function alterLogoutRedirectUrl($redirect_to, $intentRedirectTo, $user)
@@ -210,6 +244,7 @@ class CustomAuthHandler
         $registrationForm .= '<input type="hidden" name="__redirect_to" value="' . esc_url($attributes['redirect_to']) . '">';
         $registrationForm .= '<input type="hidden" name="_fls_signup_nonce" value="' . wp_create_nonce('fluent_auth_signup_nonce') . '">';
         $registrationForm .= LoginBridge::markerFields();
+        $registrationForm .= Turnstile::widget(Turnstile::SIGNUP);
         $registrationForm .= '<button type="submit" id="fls_submit">' . $this->submitBtnLoadingSvg() . '<span>' . __('Signup', 'fluent-security') . '</span></button>';
 
         $registrationForm .= '</div></form>';
@@ -272,6 +307,7 @@ class CustomAuthHandler
         $resetPasswordForm .= '<input type="hidden" name="__redirect_to" value="' . esc_attr($attributes['redirect_to']) . '">';
         $resetPasswordForm .= '<input type="hidden" name="_fls_reset_pass_nonce" value="' . wp_create_nonce('fluent_auth_reset_pass_nonce') . '">';
         $resetPasswordForm .= LoginBridge::markerFields();
+        $resetPasswordForm .= Turnstile::widget(Turnstile::LOGIN);
         $resetPasswordForm .= '<button type="submit" id="fls_reset_pass">' . $this->submitBtnLoadingSvg() . '<span>' . __('Reset Password', 'fluent-security') . '</span></button>';
 
         $resetPasswordForm .= '</form>';
@@ -405,11 +441,42 @@ class CustomAuthHandler
             }
 
             $html .= '<div class="fs_input_wrap"><input ' . $atts . '/></div>';
+        } else if ($fieldType === 'select') {
+            $html .= '<div class="fs_input_wrap">' . $this->renderSelect($fieldName, $field) . '</div>';
         } else {
             return '';
         }
 
         return $html . '</div>';
+    }
+
+    /**
+     * A select takes `options` as value => label. The placeholder, if any, becomes an
+     * empty first option, so a required select cannot be submitted untouched.
+     *
+     * @param $fieldName string
+     * @param $field array
+     * @return string
+     */
+    private function renderSelect($fieldName, $field)
+    {
+        $atts = 'id="' . esc_attr(Arr::get($field, 'id')) . '" name="' . esc_attr($fieldName) . '"';
+
+        if (Arr::get($field, 'required')) {
+            $atts .= ' required';
+        }
+
+        $options = '';
+
+        if ($placeholder = Arr::get($field, 'placeholder')) {
+            $options .= '<option value="" disabled selected>' . esc_html($placeholder) . '</option>';
+        }
+
+        foreach ((array)Arr::get($field, 'options', []) as $value => $label) {
+            $options .= '<option value="' . esc_attr($value) . '">' . esc_html($label) . '</option>';
+        }
+
+        return '<select ' . $atts . '>' . $options . '</select>';
     }
 
     /**
@@ -730,6 +797,14 @@ class CustomAuthHandler
             ], 422);
         }
 
+        $turnstile = Turnstile::check(Turnstile::LOGIN);
+
+        if (is_wp_error($turnstile)) {
+            wp_send_json([
+                'message' => $turnstile->get_error_message()
+            ], 422);
+        }
+
         $redirectUrl = admin_url();
         if (isset($data['redirect_to']) && filter_var($data['redirect_to'], FILTER_VALIDATE_URL)) {
             $userRedirect = sanitize_url($data['redirect_to']);
@@ -748,30 +823,23 @@ class CustomAuthHandler
                 $redirectUrl = apply_filters('login_redirect', $redirectUrl, false, $user);
             }
             wp_send_json([
-                'redirect' => $redirectUrl
+                'redirect' => Helper::getValidatedRedirectUrl($redirectUrl, admin_url())
             ], 200);
         }
 
-        $email = sanitize_user($data['log']);
+        /*
+         * An unknown account goes through wp_signon() like a real one. Answering it early
+         * skipped the attempt limit and the IP rules, so a locked-out or blocked visitor
+         * could still tell real accounts from unknown ones by the reply.
+         */
+        $user = wp_signon();
 
-        if (is_email($email)) {
-            $user = get_user_by('email', $email);
-        } else {
-            $user = get_user_by('login', $email);
-        }
-
-        if (!$user) {
-            $user = new \WP_Error('authentication_failed', __('<strong>Error</strong>: That username, email address or password is not correct.', 'fluent-security'));
-
-            do_action('wp_login_failed', $email, $user);
-
+        // One reply for no such account and a wrong password, or the two tell an account apart.
+        if (is_wp_error($user) && in_array($user->get_error_code(), ['invalid_username', 'invalid_email', 'incorrect_password'], true)) {
             wp_send_json([
                 'message' => __('That email address and password do not match. Please try again.', 'fluent-security')
             ], 422);
         }
-
-
-        $user = wp_signon();
 
         if (is_wp_error($user)) {
             wp_send_json([
@@ -786,8 +854,13 @@ class CustomAuthHandler
             $filteredRedirectUrl = $redirectUrl;
         }
 
+        /*
+         * login_helper.js assigns this straight to window.location, so this is where
+         * wp-login.php would have called wp_safe_redirect(): any plugin may have had a say
+         * in the filters above.
+         */
         wp_send_json([
-            'redirect' => $filteredRedirectUrl
+            'redirect' => Helper::getValidatedRedirectUrl($filteredRedirectUrl, admin_url())
         ], 200);
     }
 
@@ -823,6 +896,23 @@ class CustomAuthHandler
          */
         do_action('fluent_auth/before_signup_validation', $formData);
 
+        /*
+         * The post that carries the emailed code is proven by the code, and its widget token
+         * was spent on the first post. Only skipped where a code is actually asked for: with
+         * verification filtered off, a made-up code field would otherwise create the account.
+         */
+        $isCodeStep = !empty($formData['_email_verification_token']) && apply_filters('fluent_auth/verify_signup_email', true, $formData);
+
+        if (!$isCodeStep) {
+            $turnstile = Turnstile::check(Turnstile::SIGNUP);
+
+            if (is_wp_error($turnstile)) {
+                wp_send_json([
+                    'message' => $turnstile->get_error_message()
+                ], 422);
+            }
+        }
+
         $errors = $this->validateSignUpData($formData);
 
         if ($errors) {
@@ -854,20 +944,16 @@ class CustomAuthHandler
             ], 422);
         }
 
-        // let's validate the name field
-        $fullName = trim(Arr::get($formData, 'first_name') . ' ' . Arr::get($formData, 'last_name'));
-        if (!empty($fullName)) {
-            // check if the name is valid
-            // Consider if there has any special characters like +, -, *, /, etc
-            // only check the +,-,*,$,/,=,%,!,@,#,^,&,*,(,),_,{,},[,],:,;,',",<,>,?,|,`,~,,
-            if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/u', $fullName)) {
-                return __('Please provide a valid name', 'fluent-security');
-            }
-
-            // check if there has any http or https
-            if (preg_match('/http|https/', $fullName)) {
-                return __('Please provide a valid name', 'fluent-security');
-            }
+        /*
+         * Names are not policed for characters - O'Brien and Mary-Jane are names, and
+         * WordPress itself only runs sanitize_text_field() over them. A link is the one
+         * thing refused, because that is what a spam signup puts there.
+         */
+        $fullName = Arr::get($formData, 'first_name') . ' ' . Arr::get($formData, 'last_name');
+        if (stripos($fullName, 'http') !== false) {
+            wp_send_json([
+                'message' => __('Please provide a valid name', 'fluent-security')
+            ], 422);
         }
 
         if (apply_filters('fluent_auth/verify_signup_email', true, $formData)) {
@@ -947,6 +1033,11 @@ class CustomAuthHandler
          */
         $response = apply_filters('fluent_auth/signup_complete_response', $response, $user);
 
+        // login_helper.js navigates to this by script; it is checked after the last filter.
+        if (!empty($response['redirect'])) {
+            $response['redirect'] = Helper::getValidatedRedirectUrl($response['redirect'], admin_url());
+        }
+
         wp_send_json($response, 200);
     }
 
@@ -966,6 +1057,14 @@ class CustomAuthHandler
                 'message' => __('That form had been open too long. Please reload the page and try again.', 'fluent-security')
             ], 422);
 
+        }
+
+        $turnstile = Turnstile::check(Turnstile::LOGIN);
+
+        if (is_wp_error($turnstile)) {
+            wp_send_json([
+                'message' => $turnstile->get_error_message()
+            ], 422);
         }
 
         $usernameOrEmail = trim(wp_unslash(Arr::get($data, 'user_login')));
@@ -1121,6 +1220,15 @@ class CustomAuthHandler
                 if (!is_email(Arr::get($data, $fieldName))) {
                     /* translators: %s: Form Field Label */
                     $errors[$fieldName] = sprintf(__('Provided %s is not a valid email', 'fluent-security'), esc_html(strtolower($field['label'])));
+                }
+            }
+
+            if ($field['type'] === 'select' && !empty($data[$fieldName])) {
+                $value = $data[$fieldName];
+                $options = (array)Arr::get($field, 'options', []);
+                if (!is_scalar($value) || !array_key_exists((string)$value, $options)) {
+                    /* translators: %s: Form Field Label */
+                    $errors[$fieldName] = sprintf(__('Please select a valid %s', 'fluent-security'), esc_html(strtolower($field['label'])));
                 }
             }
         }
@@ -1362,8 +1470,10 @@ class CustomAuthHandler
 
         $pStart = '<p style="font-family: Arial, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">';
 
+        $firstName = esc_html(sanitize_text_field(wp_unslash((string)Arr::get($formData, 'first_name'))));
+
         /* translators: %s: First Name */
-        $message = $pStart . sprintf(__('Hello %s,', 'fluent-security'), Arr::get($formData, 'first_name')) . '</p>' .
+        $message = $pStart . sprintf(__('Hello %s,', 'fluent-security'), $firstName) . '</p>' .
             $pStart . __('Thanks for signing up. Enter the code below on the registration page to finish setting up your account.', 'fluent-security') . '</p>' .
             /* translators: %s: Verification code */
             $pStart . '<b>' . sprintf(__('Verification Code: %s', 'fluent-security'), $verifcationCode) . '</b></p>' .

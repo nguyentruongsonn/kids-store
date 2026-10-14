@@ -1,11 +1,11 @@
 === Elementor Website Builder - more than just a page builder ===
 Contributors: elemntor
-Tags: page builder, editor, landing page, drag-and-drop, elementor,
+Tags: ai, drag-and-drop, editor, landing page, mcp
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.2.4
-Beta tag: 4.2.0-beta2
+Stable tag: 4.4.0
+Beta tag: 4.4.0-beta3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,9 +19,11 @@ https://www.youtube.com/watch?v=ROEC0CPRO3w
 
 Elementor, the leading WordPress website creation platform, empowers you to build professional, pixel-perfect websites seamlessly with its no-code, drag-and-drop Atomic Editor.
 
-Supporting the full website lifecycle, Elementor lets you build, optimize, and manage your website with extended capabilities such as agentic AI creation, image optimization, transactional email delivery, accessibility tools, performance boosters, and more.
+Supporting the full website lifecycle, Elementor lets you build, optimize, and manage your website with extended capabilities such as agentic AI creation, native MCP connection, image optimization, transactional email delivery, accessibility tools, performance boosters, and more.
 
-Now in version 4, the Atomic Editor!. A new generation of performance-first atomic building blocks that puts you in control of every part of your site. Define your global design systems and reusable components once, and they apply everywhere instantly – turning hours or even days of work into single clicks. Elementor AI builds in the same structure, so anything it generates is a native, fully editable part of your site.
+Elementor is now in version 4, with a new generation of performance-first atomic building blocks that put you in control of every part of your site. Define your global design systems and reusable components once, and they apply everywhere instantly – turning hours or even days of work into single clicks.
+
+NEW! Connect your favorite AI tools, including Claude, Codex, and Cursor, directly to your Elementor sites. **[The Elementor MCP](https://go.elementor.com/wp-repo-description-tab-elementor-mcp)** acts as a new execution layer, turning plain-language prompts into real, fully editable Elementor structures, layouts, and design systems while keeping you in complete control. 
 
 Unlock all Pro features with **[Elementor Pro](https://go.elementor.com/wp-repo-description-tab-elementor-pro-pro-features/)**.
 
@@ -38,7 +40,8 @@ Need fast and secure cloud hosting for your Elementor site? Try out **[Elementor
 = 🗝️ Key features =
 
 - **[Design system](https://go.elementor.com/feature-page-global-settings/)**: Use Variables and Classes for consistent colors, typography, and design elements that update everywhere at once.  
-- **[Responsive design](https://go.elementor.com/feature-page-responsive-design/)**: Optimize your design for every device with custom breakpoints, ensuring a seamless desktop, tablet, and mobile experience.  
+- **[Responsive design](https://go.elementor.com/feature-page-responsive-design/)**: Optimize your design for every device with custom breakpoints, ensuring a seamless desktop, tablet, and mobile experience. 
+- **[Elementor MCP](https://go.elementor.com/wp-repo-description-tab-elementor-mcp)**: Seamlessly connect external AI tools such as Claude, Codex, Cursor and more, to build native Elementor pages, sections, and design systems instantly. Bring in context from other tools like Figma and review or refine every generation in the visual Elementor Editor before publishing. 
 - **Mask shapes**: Turn any element, like an image or video, into whatever shape you desire to create standout designs.  
 - **CSS transform**: Use CSS Transform to rotate, scale, and skew elements, adding dynamic styling to your site.  
 - **Entrance animations**:  Add entrance animations to elements to create engaging and interactive user experiences.  
@@ -356,42 +359,42 @@ If you want to contribute, go to our [Elementor GitHub Repository](https://githu
 
 == Changelog ==
 
-= 4.2.4 - 2026-08-31 =
+= 4.4.0 - 2026-11-09 =
 
-* Tweak: Updated WordPress compatibility to version 7.1
-* Fix: Improved code security enforcement in query handling
-
-= 4.2.3 - 2026-08-19 =
-
-* Fix: Improved code security enforcement in template handling
-* Fix: Invalid style properties prevent pages from being published
-
-= 4.2.2 - 2026-08-06 =
-
-* Fix: Editor top bar integrations may not appear in non-English languages
-
-= 4.2.1 - 2026-07-28 =
-
-* Fix: Improved code security enforcement in template handling
-* Fix: Improved code security enforcement in document handling
-* Fix: Invalid border-radius values in Global Classes prevent class changes - Atomic Editor
-* Fix: Atomic Variables synced from Atomic Classes are missing after site import - Atomic Editor
-
-= 4.2.0 - 2026-07-20 =
-
-* New: Introducing Grid for building advanced row and column layouts - Atomic Editor
-* Tweak: Improved Angie layout, composition, and design system creation from prompts and images - Atomic Editor
-* Tweak: Added dynamic tag support for AI-generated element properties
-* Fix: VideoPress URLs do not display on the frontend when used in Background Video and Lightbox dynamic tags ([#24467](https://github.com/elementor/elementor/issues/24467))
-* Fix: Grid containers can cause slower Editor performance on complex pages
-* Fix: Filters do not work as expected in Website Templates
-* Fix: The Save as Template button is unreachable when the modal does not fit the browser viewport
-* Fix: AI-related Editor features show a console error when required services are not available yet
-* Fix: Missing classes can affect the editing panel when they are still applied to elements - Atomic Editor
-* Fix: Unsaved Class changes are not detected when switching between Design System tabs - Atomic Editor
-* Fix: Custom Font names with spaces or special characters do not work in the Font Family control - Atomic Editor
-* Fix: The drop indicator is missing when dragging Atomic elements inside row Containers - Atomic Editor
-* Fix: Global Classes can be shared across multiple Kits instead of being separated per Kit - Atomic Editor
-* Fix: Angie cannot update text in some Atomic elements - Atomic Editor
+* New: Introducing Agent Ready to help prepare websites for AI agents with readiness scoring, content discovery tools, and bot access controls
+* New: Introducing the SVG Icon Library with Font Awesome 7 support
+* New: Introducing the List element for creating customizable lists with nested items and custom markers
+* New: Introducing the Google Maps element for displaying locations with customizable address and zoom settings
+* Tweak: Added WebMCP support to forms created through Elementor MCP, allowing compatible AI agents to discover and interact with them
+* Tweak: Extended Elementor MCP support to additional legacy widgets, including Counter, Progress Bar, Social Icons, Image Gallery, and Image Carousel
+* Tweak: Added support for renaming elements in the Structure panel through Elementor MCP
+* Tweak: Added support for viewing and enabling or disabling Elementor experiments through Elementor MCP
+* Tweak: Added support for clearing Elementor cache through Elementor MCP
+* Tweak: Added support for retrieving Elementor System Information through Elementor MCP
+* Tweak: Added support for retrieving Elementor license information through Elementor MCP
+* Tweak: Added support for uploading images to the Media Library through Elementor MCP
+* Tweak: Added support for undoing changes made through Elementor MCP using revisions
+* Tweak: Added support for separate open and closed icons, with customizable icon rotation in the Accordion element
+* Tweak: Added support for content-only editing permissions in Atomic elements
+* Tweak: Added Selected state styling support to the Accordion element
+* Tweak: Improved the user interface for Image, Video, and Background controls
+* Tweak: Added Default Styles support to website import and export
+* Tweak: Added the Span HTML tag option to the Heading element
+* Fix: Improved error handling for REST API permission checks ([#37497](https://github.com/elementor/elementor/issues/37497), props [@robertstaddon](https://github.com/robertstaddon))
+* Fix: Dimensions control does not correctly inherit linked settings and values across responsive breakpoints ([#28107](https://github.com/elementor/elementor/issues/28107), props [@m1ga](https://github.com/m1ga))
+* Fix: Removed an invalid Swiper source map reference that caused 404 errors ([#10764](https://github.com/elementor/elementor/issues/10764), [#5151](https://github.com/elementor/elementor/issues/5151), props [@m1ga](https://github.com/m1ga))
+* Fix: Color picker closes unexpectedly when changing the color format in Variables Manager ([#37423](https://github.com/elementor/elementor/issues/37423))
+* Fix: Form submissions through AI agents may return an error even when submitted successfully ([#37901](https://github.com/elementor/elementor/issues/37901))
+* Fix: Incorrect heading hierarchy in WordPress admin screens (props [@ramiy](https://github.com/ramiy))
+* Fix: Incorrect image URL encoding in the Image Carousel widget (props [@szepeviktor](https://github.com/szepeviktor))
+* Fix: Components may fail to load in the Editor when server rate limits are reached (props [@faisalahammad](https://github.com/faisalahammad))
+* Fix: Custom Mask may attempt to load a nonexistent SVG file when no custom image is selected (props [@szepeviktor](https://github.com/szepeviktor))
+* Fix: Element IDs are not regenerated when pasting Atomic elements at the page root
+* Fix: Unable to clear or enter multi-digit values in Number controls with minimum and maximum limits
+* Fix: Revisions panel may run out of memory when editing pages with large amounts of metadata
+* Fix: Carousel widgets with a single item trigger an error when navigating with the keyboard
+* Fix: Clearing a size value resets the selected unit to PX in Atomic style controls
+* Fix: Styles are missing or briefly disappear when loading large pages in the Editor
+* Fix: Design System styles are not updated correctly after certain site settings changes
 
 [See changelog for all versions.](https://go.elementor.com/full-changelog/)

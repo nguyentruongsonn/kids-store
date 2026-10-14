@@ -1,0 +1,360 @@
+# Copyright (C) 2026 payOS Team
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: payOS 1.0.76\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/payos\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-20T06:13:56+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: payos\n"
+
+#. Plugin Name of the plugin
+#: payos.php
+msgid "payOS"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: payos.php
+msgid "https://payos.vn/docs/tich-hop-webhook/woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+#: payos.php
+msgid "Quick bank transfer by generating QR codes that are accepted by 37 Vietnam banking App: Vietcombank, Vietinbank, BIDV, ACB, VPBank, MBank, TPBank, Digimi, MSB ... Developed for WooCommerce."
+msgstr ""
+
+#. Author of the plugin
+#: payos.php
+msgid "payOS Team"
+msgstr ""
+
+#. Author URI of the plugin
+#: payos.php
+msgid "https://payos.vn"
+msgstr ""
+
+#: classes/class-payos.php:84
+msgid "Payment by bank transfer (Scan VietQR)"
+msgstr ""
+
+#: classes/class-payos.php:85
+msgid "Take payments by scanning QR code with Vietnamese banking App. Supported by most major banks in Vietnam"
+msgstr ""
+
+#: classes/class-payos.php:154
+msgid "payOS has not been set up yet!"
+msgstr ""
+
+#: classes/class-payos.php:168
+msgid "payOS has not been set up by the administrator. Please contact the system administrator."
+msgstr ""
+
+#: classes/class-payos.php:194
+msgid "Successful webhook registration"
+msgstr ""
+
+#: classes/class-payos.php:201
+msgid "Webhook creation failed"
+msgstr ""
+
+#: classes/class-payos.php:207
+msgid "Settings saved"
+msgstr ""
+
+#: classes/class-payos.php:213
+msgid "Can not save settings! Please refresh this page."
+msgstr ""
+
+#: classes/class-payos.php:300
+msgid "Enable/Disable"
+msgstr ""
+
+#: classes/class-payos.php:302
+msgid "Enable bank transfer"
+msgstr ""
+
+#: classes/class-payos.php:306
+msgid "Title"
+msgstr ""
+
+#: classes/class-payos.php:308
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: classes/class-payos.php:309
+msgid "VietQR payment via payOS"
+msgstr ""
+
+#: classes/class-payos.php:313
+msgid "Description"
+msgstr ""
+
+#: classes/class-payos.php:315
+msgid "Payment method description that the customer will see on your checkout."
+msgstr ""
+
+#: classes/class-payos.php:316
+msgid "Pay for orders via payOS. Supported by almost Vietnamese banking apps"
+msgstr ""
+
+#: classes/class-payos.php:333
+msgid "Show less"
+msgstr ""
+
+#: classes/class-payos.php:334
+msgid "No Connection"
+msgstr ""
+
+#: classes/class-payos.php:334
+#: classes/class-payos.php:481
+msgid "Connected"
+msgstr ""
+
+#: classes/class-payos.php:335
+msgid "Hide"
+msgstr ""
+
+#: classes/class-payos.php:336
+#: classes/class-payos.php:539
+msgid "Show"
+msgstr ""
+
+#: classes/class-payos.php:402
+msgid "Prefix:"
+msgstr ""
+
+#: classes/class-payos.php:405
+msgid "Maximum 3 characters, no spaces and no special characters. If contained, it will be deleted. Please do not prefix starting with FT, TF, TT, VQR"
+msgstr ""
+
+#: classes/class-payos.php:409
+msgid "Status if payment is successful:"
+msgstr ""
+
+#: classes/class-payos.php:421
+msgid "Status if payment is underpaid:"
+msgstr ""
+
+#: classes/class-payos.php:433
+msgid "Status if payment is failed:"
+msgstr ""
+
+#: classes/class-payos.php:446
+msgid "Enable refresh upon successful payment:"
+msgstr ""
+
+#: classes/class-payos.php:450
+msgid "Enable"
+msgstr ""
+
+#: classes/class-payos.php:471
+msgid "Client ID"
+msgstr ""
+
+#: classes/class-payos.php:472
+msgid "API Key"
+msgstr ""
+
+#: classes/class-payos.php:473
+msgid "Checksum Key"
+msgstr ""
+
+#: classes/class-payos.php:477
+msgid "payOS connection"
+msgstr ""
+
+#: classes/class-payos.php:481
+msgid "Not connected"
+msgstr ""
+
+#: classes/class-payos.php:486
+msgid "Payment channel"
+msgstr ""
+
+#: classes/class-payos.php:487
+msgid "Bank"
+msgstr ""
+
+#: classes/class-payos.php:488
+msgid "Account number"
+msgstr ""
+
+#: classes/class-payos.php:489
+msgid "Account name"
+msgstr ""
+
+#: classes/class-payos.php:499
+msgid "Connect your payOS payment channel to show a QR code for every order and confirm payments automatically."
+msgstr ""
+
+#: classes/class-payos.php:504
+msgid "Webhook URL"
+msgstr ""
+
+#: classes/class-payos.php:507
+msgid "Copied"
+msgstr ""
+
+#: classes/class-payos.php:507
+msgid "Copy"
+msgstr ""
+
+#: classes/class-payos.php:509
+msgid "payOS sends payment notifications to this address. It is registered with payOS automatically when you click \"Check connection payOS\", you do not need to enter it on my.payos.vn."
+msgstr ""
+
+#. translators: %s: webhook URL
+#: classes/class-payos.php:515
+#: classes/class-payos.php:968
+#, php-format
+msgid "payOS needs to reach your website over the Internet to send payment notifications, but the webhook URL %s is a local address (localhost or LAN). Connect payOS from the public domain of your website. When testing on your computer, open the site through a tunnel (for example Cloudflare Tunnel or ngrok) and connect again."
+msgstr ""
+
+#: classes/class-payos.php:523
+msgid "Change payment channel"
+msgstr ""
+
+#: classes/class-payos.php:523
+msgid "Enter connection details"
+msgstr ""
+
+#. translators: %s: link my.payos.vn
+#: classes/class-payos.php:528
+#, php-format
+msgid "Sign in to %s, open \"Payment channels\" and create or choose a channel."
+msgstr ""
+
+#: classes/class-payos.php:531
+msgid "Copy the Client ID, API Key and Checksum Key of the channel into the fields below."
+msgstr ""
+
+#: classes/class-payos.php:532
+msgid "Click \"Check connection payOS\". The status turns to \"Connected\" when everything is set up."
+msgstr ""
+
+#: classes/class-payos.php:544
+msgid "Check connection payOS"
+msgstr ""
+
+#: classes/class-payos.php:545
+msgid "Instructions to get Client ID and API Key"
+msgstr ""
+
+#: classes/class-payos.php:559
+msgid "Please wait..."
+msgstr ""
+
+#: classes/class-payos.php:560
+#: classes/class-payos.php:583
+msgid "Cannot show payment link"
+msgstr ""
+
+#: classes/class-payos.php:575
+#: classes/class-payos.php:579
+msgid "Order has been successfully paid."
+msgstr ""
+
+#: classes/class-payos.php:679
+msgid "Awaiting payment"
+msgstr ""
+
+#: classes/class-payos.php:699
+msgid "Not use PayOS as payment method"
+msgstr ""
+
+#: classes/class-payos.php:702
+msgid "Not use PayOS payment gateway"
+msgstr ""
+
+#: classes/class-payos.php:769
+msgid "Your order has been cancelled."
+msgstr ""
+
+#: classes/class-payos.php:771
+msgid "Your order is underpaid."
+msgstr ""
+
+#: classes/class-payos.php:775
+msgid "Thank you. Your order has been fulfilled."
+msgstr ""
+
+#: classes/class-payos.php:777
+msgid "Thank you. Your order is processing."
+msgstr ""
+
+#: classes/class-payos.php:865
+#: classes/class-payos.php:887
+#: classes/class-payos.php:938
+msgid "Webhook delivered successfully"
+msgstr ""
+
+#: classes/class-payos.php:873
+#: classes/class-payos.php:1097
+msgid "Data not integrity"
+msgstr ""
+
+#. translators: %d: order code
+#: classes/class-payos.php:880
+#, php-format
+msgid "Error when get order #%d"
+msgstr ""
+
+#: classes/class-payos.php:911
+msgid "Order has been overpaid"
+msgstr ""
+
+#: classes/class-payos.php:918
+msgid "Order has been underpaid"
+msgstr ""
+
+#. translators: 1: order code, 2: amount, 3: description, 4: account number, 5: reference
+#: classes/class-payos.php:930
+#, php-format
+msgid "<b>Transaction Information:</b> <br> Order Code: %1$s <br> Amount: %2$s <br> Description: %3$s <br> Account Number: %4$s <br> Reference: %5$s"
+msgstr ""
+
+#. translators: %s: lỗi kết nối
+#: classes/class-payos.php:989
+#, php-format
+msgid "Could not connect to payOS: %s"
+msgstr ""
+
+#: classes/class-payos.php:990
+msgid "Webhook creation request failed: "
+msgstr ""
+
+#: classes/class-payos.php:996
+msgid "Webhook confirmed"
+msgstr ""
+
+#. translators: %s: webhook URL
+#: classes/class-payos.php:1004
+#, php-format
+msgid "payOS could not call the webhook URL %s. Make sure your website is reachable from the Internet over HTTPS and that payOS requests are not blocked by a firewall, maintenance mode or a security plugin."
+msgstr ""
+
+#. translators: 1: thông báo lỗi từ payOS, 2: mã lỗi
+#: classes/class-payos.php:1007
+#, php-format
+msgid "payOS responded: %1$s (code %2$s). Check the Client ID and API Key of your payment channel."
+msgstr ""
+
+#: classes/class-payos.php:1010
+msgid "Webhook creation response did not meet success criteria."
+msgstr ""
+
+#: payos.php:70
+#: payos.php:75
+#: payos.php:99
+msgid "Underpaid"
+msgstr ""
+
+#: payos.php:82
+msgid "Setting"
+msgstr ""

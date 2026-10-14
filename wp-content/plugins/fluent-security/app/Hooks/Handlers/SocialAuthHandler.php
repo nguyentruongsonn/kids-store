@@ -23,8 +23,8 @@ class SocialAuthHandler
 
         add_filter('login_form_bottom', [$this, 'maybePushToCustomForm']);
 
-        add_filter('fluent_support/before_registration_form_close', [$this, 'maybePushRegistrationField']);
-        add_filter('fluent_auth/after_registration_form_close', [$this, 'maybePushRegistrationField']);
+        add_filter('fluent_support/before_registration_form_close', [$this, 'maybePushRegistrationField'], 10, 3);
+        add_filter('fluent_auth/after_registration_form_close', [$this, 'maybePushRegistrationField'], 10, 3);
     }
 
     public function maybeSocialAuth()
@@ -224,17 +224,9 @@ class SocialAuthHandler
             return $user;
         }
 
-        $intentRedirectTo = '';
-        if (isset($_COOKIE['fs_intent_redirect'])) {
-
-            $cookieRedirect = urldecode($_COOKIE['fs_intent_redirect']);
-            // check if the url is valid
-            if (!filter_var($cookieRedirect, FILTER_VALIDATE_URL)) {
-                $cookieRedirect = admin_url();
-            }
-
-            $redirect_to = sanitize_url($cookieRedirect);
-            $intentRedirectTo = $redirect_to;
+        $intentRedirectTo = AuthService::getIntentRedirect();
+        if ($intentRedirectTo) {
+            $redirect_to = $intentRedirectTo;
         } else {
             if (is_multisite() && !get_active_blog_for_user($user->ID) && !is_super_admin($user->ID)) {
                 $redirect_to = user_admin_url();
@@ -301,14 +293,9 @@ class SocialAuthHandler
             return $user;
         }
 
-        $intentRedirectTo = '';
-        if (isset($_COOKIE['fs_intent_redirect'])) {
-            $cookieRedirect = sanitize_url($_COOKIE['fs_intent_redirect']);
-            if (!filter_var($cookieRedirect, FILTER_VALIDATE_URL)) {
-                $cookieRedirect = admin_url();
-            }
-            $redirect_to = $cookieRedirect;
-            $intentRedirectTo = $redirect_to;
+        $intentRedirectTo = AuthService::getIntentRedirect();
+        if ($intentRedirectTo) {
+            $redirect_to = $intentRedirectTo;
         } else {
             if (is_multisite() && !get_active_blog_for_user($user->ID) && !is_super_admin($user->ID)) {
                 $redirect_to = user_admin_url();
@@ -375,14 +362,9 @@ class SocialAuthHandler
             return $user;
         }
 
-        $intentRedirectTo = '';
-        if (isset($_COOKIE['fs_intent_redirect'])) {
-            $cookieRedirect = sanitize_url($_COOKIE['fs_intent_redirect']);
-            if (!filter_var($cookieRedirect, FILTER_VALIDATE_URL)) {
-                $cookieRedirect = admin_url();
-            }
-            $redirect_to = $cookieRedirect;
-            $intentRedirectTo = $redirect_to;
+        $intentRedirectTo = AuthService::getIntentRedirect();
+        if ($intentRedirectTo) {
+            $redirect_to = $intentRedirectTo;
         } else {
             if (is_multisite() && !get_active_blog_for_user($user->ID) && !is_super_admin($user->ID)) {
                 $redirect_to = user_admin_url();
@@ -500,22 +482,30 @@ class SocialAuthHandler
         $this->loadCss();
     }
 
-    public function maybePushRegistrationField($html)
+    public function maybePushRegistrationField($html, $registrationFields = [], $attributes = [])
     {
         if (!$this->isEnabled()) {
             return $html;
         }
 
+        $redirect = '';
+        if (!empty($attributes['redirect_to']) && filter_var($attributes['redirect_to'], FILTER_VALIDATE_URL)) {
+            $redirect = $attributes['redirect_to'];
+        }
+
         ob_start();
-        $this->initSignupButtonLoads();
+        $this->initSignupButtonLoads('fm_signup_with_wrap', 'block', $redirect);
         $content = ob_get_clean();
 
         return $html . $content;
     }
 
-    private function initSignupButtonLoads($selector = 'fm_signup_with_wrap', $display = 'block')
+    private function initSignupButtonLoads($selector = 'fm_signup_with_wrap', $display = 'block', $redirect = '')
     {
-        $buttons = $this->getSocialAuthButtons(wp_login_url(), __('Signup with', 'fluent-security'));
+        // The filter has the last word, as it does for the login buttons.
+        $redirect = apply_filters('fluent_auth/social_redirect_to', $redirect ?: admin_url());
+
+        $buttons = $this->getSocialAuthButtons($redirect, __('Signup with', 'fluent-security'));
 
         if (!$this->isEnabled('google')) {
             unset($buttons['google']);
