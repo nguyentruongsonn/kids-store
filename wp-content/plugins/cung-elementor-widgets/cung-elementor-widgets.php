@@ -75,18 +75,23 @@ final class Cung_Elementor_Widgets_Extension {
     }
 
     public function enqueue_scripts() {
+        $css_file = plugin_dir_path(__FILE__) . 'assets/css/cung-widgets.css';
+        $js_file  = plugin_dir_path(__FILE__) . 'assets/js/cung-widgets.js';
+        $css_ver  = file_exists($css_file) ? filemtime($css_file) : self::VERSION;
+        $js_ver   = file_exists($js_file) ? filemtime($js_file) : self::VERSION;
+
         wp_enqueue_style(
             'cung-widgets-style',
             plugins_url('assets/css/cung-widgets.css', __FILE__),
             [],
-            self::VERSION
+            $css_ver
         );
 
         wp_enqueue_script(
             'cung-widgets-script',
             plugins_url('assets/js/cung-widgets.js', __FILE__),
             ['jquery'],
-            self::VERSION,
+            $js_ver,
             true
         );
     }

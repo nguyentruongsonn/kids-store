@@ -95,7 +95,15 @@ define( 'DISABLE_WP_CRON', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
-
+// Hỗ trợ truy cập qua Cloudflare Tunnel / ngrok để test webhook payOS trên Localhost
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] !== 'localhost' && $_SERVER['HTTP_HOST'] !== '127.0.0.1') {
+    $scheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+    define('WP_HOME', $scheme . '://' . $_SERVER['HTTP_HOST'] . '/cung');
+    define('WP_SITEURL', $scheme . '://' . $_SERVER['HTTP_HOST'] . '/cung');
+}
 
 /* That's all, stop editing! Happy publishing. */
 

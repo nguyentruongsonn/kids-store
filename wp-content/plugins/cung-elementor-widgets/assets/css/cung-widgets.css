@@ -856,18 +856,214 @@ aside#sidebar .widget_price_filter .button {
    ========================================================================== */
 .site-branding[data-id="logo"] .site-logo-container img,
 .site-logo-container[data-id="offcanvas-logo"] img {
-  max-height: 46px !important;
+  height: 52px !important;
+  max-height: 52px !important;
   width: auto !important;
+  min-height: 48px !important;
   object-fit: contain !important;
   transition: transform 0.25s ease !important;
+  display: block !important;
 }
 
 .site-branding[data-id="logo"] .site-logo-container:hover img {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .ct-footer [data-column="widget-area-1"] figure.wp-block-image img {
-  max-height: 48px !important;
+  height: 52px !important;
+  max-height: 52px !important;
   width: auto !important;
   object-fit: contain !important;
+}
+
+@media (max-width: 689px) {
+  .site-branding[data-id="logo"] .site-logo-container img,
+  .site-logo-container[data-id="offcanvas-logo"] img {
+    height: 42px !important;
+    max-height: 42px !important;
+    min-height: 38px !important;
+  }
+}
+
+/* ==========================================================================
+   10. HERO AUTO-SLIDESHOW ROTATOR (5s INTERVAL) WITH CONTROLS
+   ========================================================================== */
+.elementor-element.elementor-element-e06974b {
+  position: relative !important;
+  overflow: visible !important;
+  background-image: none !important;
+}
+
+.elementor-element.elementor-element-e06974b > .e-con-inner {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Slideshow Container */
+.cung-hero-slideshow {
+  z-index: 10 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  pointer-events: auto !important;
+}
+
+.cung-hero-slides-inner {
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.cung-hero-slide {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  opacity: 0;
+  transform: scale(0.96) translateX(15px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+}
+
+.cung-hero-slide.is-active {
+  opacity: 1 !important;
+  transform: scale(1) translateX(0) !important;
+  pointer-events: auto !important;
+}
+
+/* Floating Glassmorphism Controls (Dots & Arrows) */
+.cung-hero-controls {
+  z-index: 25 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: rgba(255, 253, 249, 0.92) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  padding: 6px 14px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 18px rgba(60, 45, 49, 0.12) !important;
+  border: 1px solid rgba(240, 222, 226, 0.8) !important;
+  pointer-events: auto !important;
+}
+
+.cung-hero-arrow {
+  background: transparent !important;
+  border: none !important;
+  color: #8F3F54 !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  padding: 2px 7px !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+}
+
+.cung-hero-arrow:hover {
+  background: #F2E5E4 !important;
+  color: #A94F65 !important;
+  transform: scale(1.15) !important;
+}
+
+.cung-hero-dots {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.cung-hero-dot {
+  background: #E8D3D6 !important;
+  border: none !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 4px !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.cung-hero-dot.is-active {
+  background: #8F3F54 !important;
+  width: 22px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 6px rgba(143, 63, 84, 0.3) !important;
+}
+
+/* --- DESKTOP LAYOUT (min-width: 1025px) --- */
+@media (min-width: 1025px) {
+  .cung-hero-slideshow {
+    position: absolute !important;
+    top: 30px !important;
+    right: 4% !important;
+    width: 46% !important;
+    height: 440px !important;
+    justify-content: flex-end !important;
+  }
+
+  .cung-hero-slides-inner {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 385px !important;
+  }
+
+  .cung-hero-slide {
+    background-position: center right !important;
+  }
+
+  .cung-hero-controls {
+    position: relative !important;
+    margin-bottom: 6px !important;
+  }
+}
+
+/* --- TABLET & MOBILE LAYOUT (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  .cung-hero-slideshow {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    height: 340px !important;
+    margin: 20px 0 30px !important;
+  }
+
+  .cung-hero-slides-inner {
+    position: relative !important;
+    width: 100% !important;
+    height: 285px !important;
+  }
+
+  .cung-hero-slide {
+    background-position: center center !important;
+  }
+
+  .cung-hero-controls {
+    position: relative !important;
+    margin-top: 10px !important;
+  }
+}
+
+@media (max-width: 689px) {
+  .cung-hero-slideshow {
+    height: 290px !important;
+    margin: 15px 0 25px !important;
+  }
+
+  .cung-hero-slides-inner {
+    height: 240px !important;
+  }
+
+  .cung-hero-controls {
+    padding: 4px 10px !important;
+    gap: 8px !important;
+  }
+
+  .cung-hero-arrow {
+    font-size: 15px !important;
+  }
 }
