@@ -107,10 +107,10 @@
 }
 
 .cung-category-card:hover {
-  border-color: var(--theme-palette-color-1, #A94F65);
+  border-color: transparent !important;
   background-color: var(--theme-palette-color-8, #FFFFFF);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(60, 45, 49, 0.06);
+  box-shadow: 0 10px 24px rgba(60, 45, 49, 0.08);
 }
 
 .cung-category-thumb {
@@ -501,25 +501,29 @@ ul.products li.product:hover {
 }
 
 .cung-bottom-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 28px;
-  border-radius: 8px;
-  background-color: var(--theme-palette-color-6, #FFFDF9);
-  border: 1.5px solid var(--theme-palette-color-1, #A94F65);
-  color: var(--theme-palette-color-1, #A94F65);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 12px 32px !important;
+  border-radius: 8px !important;
+  background-color: #F2E5E4 !important;
+  border: none !important;
+  outline: none !important;
+  color: var(--theme-palette-color-1, #8F3F54) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+  box-shadow: none !important;
 }
 
 .cung-bottom-btn:hover {
-  background-color: var(--theme-palette-color-1, #A94F65);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(169, 79, 101, 0.2);
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #ffffff !important;
+  border: none !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(169, 79, 101, 0.22) !important;
 }
 
 /* ==========================================================================
@@ -845,4 +849,25 @@ aside#sidebar .widget_price_filter .button {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
   }
+}
+
+/* ==========================================================================
+   9. BRAND LOGO ENHANCEMENT
+   ========================================================================== */
+.site-branding[data-id="logo"] .site-logo-container img,
+.site-logo-container[data-id="offcanvas-logo"] img {
+  max-height: 46px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  transition: transform 0.25s ease !important;
+}
+
+.site-branding[data-id="logo"] .site-logo-container:hover img {
+  transform: scale(1.03);
+}
+
+.ct-footer [data-column="widget-area-1"] figure.wp-block-image img {
+  max-height: 48px !important;
+  width: auto !important;
+  object-fit: contain !important;
 }

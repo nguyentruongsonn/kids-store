@@ -72,7 +72,7 @@ class Cung_Product_Tabs_Widget extends Widget_Base {
             [
                 'label' => esc_html__('Chữ nút dưới cùng', 'cung-widgets'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Xem tất cả sản phẩm tại Cưng Store', 'cung-widgets'),
+                'default' => esc_html__('Xem tất cả sản phẩm', 'cung-widgets'),
                 'label_block' => true,
             ]
         );
