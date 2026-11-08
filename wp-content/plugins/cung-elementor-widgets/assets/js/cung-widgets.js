@@ -72,57 +72,77 @@
     });
   }
 
-  // 3. HERO BACKGROUND AUTO SLIDESHOW (5s) WITH INTERACTIVE CONTROLS
+  // 3. HERO BACKGROUND AUTO SLIDESHOW WITH DYNAMIC CONFIG & CONTROLS
   function initHeroSlideshow() {
     var $hero = $('.elementor-element-e06974b');
     if (!$hero.length) return;
 
-    var slides = [
+    var config = window.cungHeroConfig || {};
+    var slides = config.slides && config.slides.length ? config.slides : [
       {
         src: 'http://localhost/cung/wp-content/uploads/2026/09/08d91db3-9019-4aae-aadb-33c40f102c0c.png',
-        title: 'Đầm Hoa Thêu Cổ Sen'
+        title: 'Đầm Hoa Thêu Cổ Sen',
+        link: 'http://localhost/cung/san-pham/'
       },
       {
         src: 'http://localhost/cung/wp-content/uploads/2026/09/410483d4-1bf3-46ec-b12a-ccf899600ba9-1.png',
-        title: 'Áo Dệt Kim Kẻ Sọc'
+        title: 'Áo Dệt Kim Kẻ Sọc',
+        link: 'http://localhost/cung/san-pham/'
       },
       {
         src: 'http://localhost/cung/wp-content/uploads/2026/09/dam-be-gai-soc-1081x980-1.png',
-        title: 'Đầm Đũi Mộc Tự Nhiên'
+        title: 'Đầm Đũi Mộc Tự Nhiên',
+        link: 'http://localhost/cung/san-pham/'
       }
     ];
 
-    // Build or update slideshow DOM
-    var $slideshow = $hero.find('.cung-hero-slideshow');
-    if ($slideshow.length === 0) {
-      $slideshow = $('<div class="cung-hero-slideshow" aria-label="Bộ sưu tập nổi bật"></div>');
-      var $slidesContainer = $('<div class="cung-hero-slides-inner"></div>');
-      var $controls = $('<div class="cung-hero-controls"></div>');
-      var $prevBtn = $('<button type="button" class="cung-hero-arrow cung-hero-prev" aria-label="Ảnh trước">‹</button>');
-      var $nextBtn = $('<button type="button" class="cung-hero-arrow cung-hero-next" aria-label="Ảnh kế tiếp">›</button>');
-      var $dotsContainer = $('<div class="cung-hero-dots"></div>');
+    var intervalTime = config.interval ? parseInt(config.interval, 10) : 5000;
+    var fitMode = config.fit || 'cover';
 
-      $.each(slides, function (idx, item) {
-        var activeClass = (idx === 0) ? ' is-active' : '';
-        $slidesContainer.append('<div class="cung-hero-slide' + activeClass + '" style="background-image: url(\'' + item.src + '\')" data-index="' + idx + '" title="' + item.title + '"></div>');
-        $dotsContainer.append('<button type="button" class="cung-hero-dot' + activeClass + '" data-index="' + idx + '" aria-label="Chuyển đến ảnh ' + (idx + 1) + '"><span class="cung-hero-dot-fill"></span></button>');
-      });
+    // Remove existing to re-render fresh
+    $hero.find('.cung-hero-slideshow').remove();
 
-      $controls.append($prevBtn).append($dotsContainer).append($nextBtn);
-      $slideshow.append($slidesContainer).append($controls);
+    var $slideshow = $('<div class="cung-hero-slideshow fit-' + fitMode + '" aria-label="Bộ sưu tập nổi bật"></div>');
+    var $slidesContainer = $('<div class="cung-hero-slides-inner"></div>');
+    var $controls = $('<div class="cung-hero-controls"></div>');
+    var $prevBtn = $('<button type="button" class="cung-hero-arrow cung-hero-prev" aria-label="Ảnh trước">‹</button>');
+    var $nextBtn = $('<button type="button" class="cung-hero-arrow cung-hero-next" aria-label="Ảnh kế tiếp">›</button>');
+    var $dotsContainer = $('<div class="cung-hero-dots"></div>');
 
-      var $titleCol = $hero.find('.elementor-element-125e13c');
-      if ($titleCol.length) {
-        $titleCol.after($slideshow);
-      } else {
-        $hero.prepend($slideshow);
-      }
+    $.each(slides, function (idx, item) {
+      var activeClass = (idx === 0) ? ' is-active' : '';
+      var linkTagOpen = item.link ? '<a href="' + item.link + '" class="cung-hero-slide-link">' : '';
+      var linkTagClose = item.link ? '</a>' : '';
+
+      var $slide = $(
+        '<div class="cung-hero-slide' + activeClass + '" style="background-image: url(\'' + item.src + '\')" data-index="' + idx + '" title="' + (item.title || '') + '">' +
+          linkTagOpen + '<span class="cung-slide-clickable-area"></span>' + linkTagClose +
+        '</div>'
+      );
+      $slidesContainer.append($slide);
+
+      $dotsContainer.append(
+        '<button type="button" class="cung-hero-dot' + activeClass + '" data-index="' + idx + '" aria-label="Chuyển đến ảnh ' + (idx + 1) + '"><span class="cung-hero-dot-fill"></span></button>'
+      );
+    });
+
+    $controls.append($prevBtn).append($dotsContainer).append($nextBtn);
+    $slideshow.append($slidesContainer).append($controls);
+
+    var $titleCol = $hero.find('.elementor-element-125e13c');
+    if ($titleCol.length) {
+      $titleCol.after($slideshow);
+    } else {
+      $hero.prepend($slideshow);
     }
 
     var $slideItems = $hero.find('.cung-hero-slide');
     var $dotItems = $hero.find('.cung-hero-dot');
     var totalSlides = $slideItems.length;
-    if (totalSlides <= 1) return;
+    if (totalSlides <= 1) {
+      $controls.hide();
+      return;
+    }
 
     var currentIdx = 0;
     var isPaused = false;
@@ -142,6 +162,7 @@
     // Dot click events
     $hero.off('click.cungSlideDot', '.cung-hero-dot').on('click.cungSlideDot', '.cung-hero-dot', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       var idx = parseInt($(this).data('index'), 10);
       goToSlide(idx);
       resetTimer();
@@ -150,12 +171,14 @@
     // Arrow click events
     $hero.off('click.cungSlidePrev', '.cung-hero-prev').on('click.cungSlidePrev', '.cung-hero-prev', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       goToSlide(currentIdx - 1);
       resetTimer();
     });
 
     $hero.off('click.cungSlideNext', '.cung-hero-next').on('click.cungSlideNext', '.cung-hero-next', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       goToSlide(currentIdx + 1);
       resetTimer();
     });
@@ -171,7 +194,7 @@
         if (!isPaused) {
           goToSlide(currentIdx + 1);
         }
-      }, 5000);
+      }, intervalTime);
     }
 
     resetTimer();

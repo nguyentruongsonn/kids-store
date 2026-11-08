@@ -28,6 +28,9 @@ final class Cung_Elementor_Widgets_Extension {
     }
 
     public function __construct() {
+        require_once __DIR__ . '/admin/hero-slideshow-admin.php';
+        new \Cung_Hero_Slideshow_Admin();
+
         add_action('init', [$this, 'i18n']);
         add_action('plugins_loaded', [$this, 'init']);
     }
@@ -94,6 +97,34 @@ final class Cung_Elementor_Widgets_Extension {
             $js_ver,
             true
         );
+
+        $slides_data = get_option(\Cung_Hero_Slideshow_Admin::OPTION_SLIDES, []);
+        $settings_data = get_option(\Cung_Hero_Slideshow_Admin::OPTION_SETTINGS, [
+            'interval' => 5000,
+            'fit'      => 'cover'
+        ]);
+
+        wp_localize_script('cung-widgets-script', 'cungHeroConfig', [
+            'slides'   => !empty($slides_data) ? array_values($slides_data) : [
+                [
+                    'src'   => 'http://localhost/cung/wp-content/uploads/2026/09/08d91db3-9019-4aae-aadb-33c40f102c0c.png',
+                    'title' => 'Đầm Hoa Thêu Cổ Sen',
+                    'link'  => 'http://localhost/cung/san-pham/'
+                ],
+                [
+                    'src'   => 'http://localhost/cung/wp-content/uploads/2026/09/410483d4-1bf3-46ec-b12a-ccf899600ba9-1.png',
+                    'title' => 'Áo Dệt Kim Kẻ Sọc',
+                    'link'  => 'http://localhost/cung/san-pham/'
+                ],
+                [
+                    'src'   => 'http://localhost/cung/wp-content/uploads/2026/09/dam-be-gai-soc-1081x980-1.png',
+                    'title' => 'Đầm Đũi Mộc Tự Nhiên',
+                    'link'  => 'http://localhost/cung/san-pham/'
+                ]
+            ],
+            'interval' => intval($settings_data['interval'] ?? 5000),
+            'fit'      => sanitize_text_field($settings_data['fit'] ?? 'cover'),
+        ]);
     }
 
     public function register_widgets($widgets_manager) {

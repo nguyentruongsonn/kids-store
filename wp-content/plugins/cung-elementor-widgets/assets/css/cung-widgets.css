@@ -886,7 +886,7 @@ aside#sidebar .widget_price_filter .button {
 }
 
 /* ==========================================================================
-   10. HERO AUTO-SLIDESHOW ROTATOR (5s INTERVAL) WITH CONTROLS
+   10. HERO AUTO-SLIDESHOW ROTATOR WITH FULL-FRAME COVER & CONTROLS
    ========================================================================== */
 .elementor-element.elementor-element-e06974b {
   position: relative !important;
@@ -899,20 +899,29 @@ aside#sidebar .widget_price_filter .button {
   z-index: 2 !important;
 }
 
-/* Slideshow Container */
+/* Slideshow Card Container */
 .cung-hero-slideshow {
   z-index: 10 !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   pointer-events: auto !important;
+  position: relative !important;
 }
 
+/* The Frame that houses the slides */
 .cung-hero-slides-inner {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 24px !important;
   overflow: hidden !important;
-  pointer-events: none !important;
+  background: #F5EBEB !important;
+  box-shadow: 0 16px 40px rgba(60, 45, 49, 0.1) !important;
+  border: 1px solid rgba(240, 222, 226, 0.8) !important;
 }
 
+/* The Slide Image - BAO PHỦ TOÀN BỘ KHUNG (COVER) */
 .cung-hero-slide {
   position: absolute !important;
   top: 0 !important;
@@ -920,32 +929,52 @@ aside#sidebar .widget_price_filter .button {
   width: 100% !important;
   height: 100% !important;
   background-repeat: no-repeat !important;
-  background-size: contain !important;
+  background-position: center center !important;
+  background-size: cover !important; /* Phủ kín toàn bộ khung */
   opacity: 0;
-  transform: scale(0.96) translateX(15px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  pointer-events: none !important;
+  transform: scale(1.04);
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 24px !important;
+}
+
+/* Chế độ contain nếu người dùng chọn trong Admin */
+.cung-hero-slideshow.fit-contain .cung-hero-slide {
+  background-size: contain !important;
+  background-color: #FAF4F0 !important;
 }
 
 .cung-hero-slide.is-active {
   opacity: 1 !important;
-  transform: scale(1) translateX(0) !important;
-  pointer-events: auto !important;
+  transform: scale(1) !important;
+  z-index: 2 !important;
+}
+
+.cung-hero-slide-link,
+.cung-slide-clickable-area {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
 }
 
 /* Floating Glassmorphism Controls (Dots & Arrows) */
 .cung-hero-controls {
-  z-index: 25 !important;
+  position: absolute !important;
+  bottom: 18px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 30 !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 10px !important;
-  background: rgba(255, 253, 249, 0.92) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(255, 253, 249, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   padding: 6px 14px !important;
   border-radius: 30px !important;
-  box-shadow: 0 4px 18px rgba(60, 45, 49, 0.12) !important;
-  border: 1px solid rgba(240, 222, 226, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(60, 45, 49, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
   pointer-events: auto !important;
 }
 
@@ -975,7 +1004,7 @@ aside#sidebar .widget_price_filter .button {
 }
 
 .cung-hero-dot {
-  background: #E8D3D6 !important;
+  background: #D8BFC4 !important;
   border: none !important;
   width: 8px !important;
   height: 8px !important;
@@ -989,35 +1018,21 @@ aside#sidebar .widget_price_filter .button {
   background: #8F3F54 !important;
   width: 22px !important;
   border-radius: 4px !important;
-  box-shadow: 0 2px 6px rgba(143, 63, 84, 0.3) !important;
+  box-shadow: 0 2px 6px rgba(143, 63, 84, 0.35) !important;
 }
 
 /* --- DESKTOP LAYOUT (min-width: 1025px) --- */
 @media (min-width: 1025px) {
   .cung-hero-slideshow {
     position: absolute !important;
-    top: 30px !important;
-    right: 4% !important;
+    top: 25px !important;
+    right: 3% !important;
     width: 46% !important;
-    height: 440px !important;
-    justify-content: flex-end !important;
+    height: 450px !important;
   }
 
   .cung-hero-slides-inner {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 385px !important;
-  }
-
-  .cung-hero-slide {
-    background-position: center right !important;
-  }
-
-  .cung-hero-controls {
-    position: relative !important;
-    margin-bottom: 6px !important;
+    height: 100% !important;
   }
 }
 
@@ -1028,37 +1043,41 @@ aside#sidebar .widget_price_filter .button {
     top: auto !important;
     right: auto !important;
     width: 100% !important;
-    height: 340px !important;
-    margin: 20px 0 30px !important;
+    height: 380px !important;
+    margin: 25px 0 35px !important;
   }
 
   .cung-hero-slides-inner {
-    position: relative !important;
-    width: 100% !important;
-    height: 285px !important;
+    height: 100% !important;
+    border-radius: 20px !important;
   }
 
   .cung-hero-slide {
-    background-position: center center !important;
+    border-radius: 20px !important;
   }
 
   .cung-hero-controls {
-    position: relative !important;
-    margin-top: 10px !important;
+    bottom: 14px !important;
   }
 }
 
 @media (max-width: 689px) {
   .cung-hero-slideshow {
-    height: 290px !important;
+    height: 320px !important;
     margin: 15px 0 25px !important;
+    border-radius: 16px !important;
   }
 
   .cung-hero-slides-inner {
-    height: 240px !important;
+    border-radius: 16px !important;
+  }
+
+  .cung-hero-slide {
+    border-radius: 16px !important;
   }
 
   .cung-hero-controls {
+    bottom: 12px !important;
     padding: 4px 10px !important;
     gap: 8px !important;
   }
