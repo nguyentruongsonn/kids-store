@@ -1086,3 +1086,448 @@ aside#sidebar .widget_price_filter .button {
     font-size: 15px !important;
   }
 }
+
+
+/* ==========================================================================
+   5. NAVIGATION MENU DROPDOWN STYLES (CƯNG STORE)
+   ========================================================================== */
+/* Header Navigation - Submenu container */
+.menu-item-has-children {
+  position: relative;
+}
+
+.menu-item-has-children > a.ct-menu-link {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.25s ease;
+}
+
+.menu-item-has-children > a.ct-menu-link::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s ease;
+}
+
+.menu-item-has-children:hover > a.ct-menu-link::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+/* Submenu dropdown panel */
+.menu-item-has-children .sub-menu {
+  background-color: #FFFDF9 !important;
+  border: 1px solid rgba(169, 79, 101, 0.14) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 14px 35px rgba(60, 45, 49, 0.12), 0 4px 12px rgba(60, 45, 49, 0.05) !important;
+  padding: 8px 0 !important;
+  min-width: 230px !important;
+  overflow: hidden !important;
+  transform-origin: top center;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease !important;
+}
+
+/* Submenu item link */
+.sub-menu .menu-item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sub-menu .menu-item a.ct-menu-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 10px 22px !important;
+  color: #3C2D31 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  border-left: 3px solid transparent !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.sub-menu .menu-item a.ct-menu-link:hover,
+.sub-menu .menu-item.current-menu-item a.ct-menu-link {
+  background-color: rgba(169, 79, 101, 0.08) !important;
+  color: #A94F65 !important;
+  border-left-color: #A94F65 !important;
+  padding-left: 26px !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   6. HEADER CART BADGE & SIDE-CART DRAWER (CƯNG STORE)
+   ========================================================================== */
+/* Header Cart: Hide default Blocksy float popover */
+.ct-header-cart .ct-cart-content {
+  display: none !important;
+}
+
+/* Header Cart Count Badge */
+.ct-dynamic-count-cart {
+  background-color: #A94F65 !important;
+  color: #FFFDF9 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  line-height: 18px !important;
+  border-radius: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 4px !important;
+  box-shadow: 0 2px 6px rgba(169, 79, 101, 0.35) !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.ct-cart-item:hover .ct-dynamic-count-cart {
+  transform: scale(1.15) !important;
+}
+
+/* Side-Cart Backdrop */
+body.cung-cart-open {
+  overflow: hidden !important;
+}
+
+.cung-cart-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: rgba(30, 20, 25, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cung-cart-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Side-Cart Drawer Container */
+.cung-side-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 90vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #FFFDF9;
+  z-index: 99999;
+  box-shadow: -8px 0 35px rgba(60, 45, 49, 0.18);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.cung-side-cart-drawer.is-open {
+  transform: translateX(0);
+}
+
+/* Drawer Header */
+.cung-side-cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgba(169, 79, 101, 0.12);
+  flex-shrink: 0;
+}
+
+.cung-side-cart-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #3C2D31;
+}
+
+.cung-cart-title-icon {
+  color: #A94F65;
+  stroke: #A94F65;
+}
+
+.cung-side-cart-count-badge {
+  background-color: #A94F65;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
+}
+
+.cung-cart-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6D5C60;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cung-cart-close-btn:hover {
+  background-color: rgba(169, 79, 101, 0.1);
+  color: #A94F65;
+  transform: rotate(90deg);
+}
+
+/* Shipping Notice */
+.cung-cart-free-shipping-notice {
+  background-color: rgba(169, 79, 101, 0.06);
+  padding: 10px 24px;
+  font-size: 13px;
+  color: #3C2D31;
+  border-bottom: 1px solid rgba(169, 79, 101, 0.08);
+  flex-shrink: 0;
+}
+
+.cung-shipping-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cung-shipping-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Drawer Body & Mini Cart */
+.cung-side-cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.cung-side-cart-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cung-side-cart-body::-webkit-scrollbar-thumb {
+  background-color: rgba(169, 79, 101, 0.25);
+  border-radius: 4px;
+}
+
+/* Empty Cart State */
+.cung-side-cart-body .woocommerce-mini-cart__empty-message,
+.cung-side-cart-body .ct-cart-empty {
+  text-align: center;
+  padding: 40px 10px;
+  color: #6D5C60;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart__empty-message::before {
+  content: '🛍️';
+  font-size: 42px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+/* Mini Cart List */
+.cung-side-cart-body .woocommerce-mini-cart {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 1;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 14px !important;
+  padding: 14px 0 !important;
+  border-bottom: 1px dashed rgba(60, 45, 49, 0.12) !important;
+  margin: 0 !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item img {
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 8px !important;
+  object-fit: cover !important;
+  border: 1px solid rgba(169, 79, 101, 0.12) !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  float: none !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item a:not(.remove) {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #3C2D31 !important;
+  line-height: 1.4 !important;
+  display: block !important;
+  padding-right: 25px !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item a:not(.remove):hover {
+  color: #A94F65 !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item .quantity {
+  font-size: 13px !important;
+  color: #8F3F54 !important;
+  font-weight: 600 !important;
+  display: block !important;
+  margin-top: 5px !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item .remove_from_cart_button {
+  position: absolute !important;
+  top: 14px !important;
+  right: 0 !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #9E8D91 !important;
+  background: transparent !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart-item .remove_from_cart_button:hover {
+  background-color: #FFECEF !important;
+  color: #E53935 !important;
+}
+
+/* Subtotal Section */
+.cung-side-cart-body .woocommerce-mini-cart__total {
+  margin-top: auto !important;
+  padding-top: 18px !important;
+  border-top: 2px solid rgba(169, 79, 101, 0.15) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #3C2D31 !important;
+  margin-bottom: 0 !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart__total strong {
+  font-weight: 600 !important;
+  color: #3C2D31 !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart__total .woocommerce-Price-amount {
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: #A94F65 !important;
+}
+
+/* Buttons Section */
+.cung-side-cart-body .woocommerce-mini-cart__buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-top: 16px !important;
+  padding: 0 !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart__buttons .button {
+  width: 100% !important;
+  text-align: center !important;
+  border-radius: 8px !important;
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  transition: all 0.25s ease !important;
+}
+
+/* "Xem giỏ hàng" button */
+.cung-side-cart-body .woocommerce-mini-cart__buttons .button:not(.checkout) {
+  background-color: transparent !important;
+  color: #A94F65 !important;
+  border: 1.5px solid #A94F65 !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart__buttons .button:not(.checkout):hover {
+  background-color: rgba(169, 79, 101, 0.08) !important;
+  color: #8F3F54 !important;
+  border-color: #8F3F54 !important;
+}
+
+/* "Thanh toán" button */
+.cung-side-cart-body .woocommerce-mini-cart__buttons .button.checkout {
+  background-color: #A94F65 !important;
+  color: #FFFDF9 !important;
+  border: 1.5px solid #A94F65 !important;
+  box-shadow: 0 4px 14px rgba(169, 79, 101, 0.3) !important;
+}
+
+.cung-side-cart-body .woocommerce-mini-cart__buttons .button.checkout:hover {
+  background-color: #8F3F54 !important;
+  border-color: #8F3F54 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(143, 63, 84, 0.35) !important;
+}
+
+/* Brand styling for main WooCommerce Cart & Checkout buttons */
+.woocommerce .button.checkout-button,
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt {
+  background-color: #A94F65 !important;
+  border-color: #A94F65 !important;
+  color: #FFFDF9 !important;
+  border-radius: 8px !important;
+  transition: all 0.25s ease !important;
+}
+
+.woocommerce .button.checkout-button:hover,
+.woocommerce #respond input#submit.alt:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt:hover {
+  background-color: #8F3F54 !important;
+  border-color: #8F3F54 !important;
+  box-shadow: 0 4px 14px rgba(143, 63, 84, 0.3) !important;
+}

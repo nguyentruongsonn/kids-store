@@ -31,6 +31,14 @@ final class Cung_Elementor_Widgets_Extension {
         require_once __DIR__ . '/admin/hero-slideshow-admin.php';
         new \Cung_Hero_Slideshow_Admin();
 
+        require_once __DIR__ . '/includes/telegram-notifier.php';
+        new \Cung_Telegram_Notifier();
+
+        require_once __DIR__ . '/admin/telegram-admin.php';
+        new \Cung_Telegram_Admin();
+
+        require_once __DIR__ . '/side-cart-and-menu.php';
+
         add_action('init', [$this, 'i18n']);
         add_action('plugins_loaded', [$this, 'init']);
     }

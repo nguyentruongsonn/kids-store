@@ -200,11 +200,71 @@
     resetTimer();
   }
 
+  /**
+   * Side-Cart Drawer & Header Cart Trigger (Cưng Store)
+   */
+  function initSideCart() {
+    var $drawer = $('#cung-side-cart-drawer');
+    var $backdrop = $('#cung-cart-backdrop');
+
+    if (!$drawer.length) return;
+
+    function openSideCart() {
+      $drawer.addClass('is-open').attr('aria-hidden', 'false');
+      $backdrop.addClass('is-active').attr('aria-hidden', 'false');
+      $('body').addClass('cung-cart-open');
+    }
+
+    function closeSideCart() {
+      $drawer.removeClass('is-open').attr('aria-hidden', 'true');
+      $backdrop.removeClass('is-active').attr('aria-hidden', 'true');
+      $('body').removeClass('cung-cart-open');
+    }
+
+    // Intercept click on header cart icon / trigger
+    $(document).off('click.cungCartOpen', '.ct-header-cart > a, .ct-cart-item, [data-id="cart"] a')
+      .on('click.cungCartOpen', '.ct-header-cart > a, .ct-cart-item, [data-id="cart"] a', function (e) {
+        e.preventDefault();
+        openSideCart();
+      });
+
+    // Close on close button click
+    $(document).off('click.cungCartClose', '#cung-cart-close')
+      .on('click.cungCartClose', '#cung-cart-close', function (e) {
+        e.preventDefault();
+        closeSideCart();
+      });
+
+    // Close on backdrop click
+    $(document).off('click.cungCartBackdrop', '#cung-cart-backdrop')
+      .on('click.cungCartBackdrop', '#cung-cart-backdrop', function (e) {
+        e.preventDefault();
+        closeSideCart();
+      });
+
+    // Close on ESC key
+    $(document).off('keydown.cungCartEsc')
+      .on('keydown.cungCartEsc', function (e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+          if ($drawer.hasClass('is-open')) {
+            closeSideCart();
+          }
+        }
+      });
+
+    // Automatically slide drawer open when WooCommerce adds an item to cart via AJAX
+    $(document.body).off('added_to_cart.cungAutoOpen')
+      .on('added_to_cart.cungAutoOpen', function () {
+        openSideCart();
+      });
+  }
+
   // Document ready
   $(document).ready(function () {
     initCountdown();
     initTabs();
     initHeroSlideshow();
+    initSideCart();
   });
 
   // Elementor Frontend Hook (for live preview in Elementor Editor)
