@@ -129,12 +129,8 @@
     $controls.append($prevBtn).append($dotsContainer).append($nextBtn);
     $slideshow.append($slidesContainer).append($controls);
 
-    var $titleCol = $hero.find('.elementor-element-125e13c');
-    if ($titleCol.length) {
-      $titleCol.after($slideshow);
-    } else {
-      $hero.prepend($slideshow);
-    }
+    // Prepend as full background layer inside $hero (.elementor-element-e06974b)
+    $hero.prepend($slideshow);
 
     var $slideItems = $hero.find('.cung-hero-slide');
     var $dotItems = $hero.find('.cung-hero-dot');

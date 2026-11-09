@@ -38,6 +38,7 @@ final class Cung_Elementor_Widgets_Extension {
         new \Cung_Telegram_Admin();
 
         require_once __DIR__ . '/side-cart-and-menu.php';
+        require_once __DIR__ . '/includes/policy-sidebar.php';
 
         add_action('init', [$this, 'i18n']);
         add_action('plugins_loaded', [$this, 'init']);

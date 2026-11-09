@@ -432,14 +432,42 @@ ul.products li.product:hover {
   transform: translateY(-3px);
 }
 
-/* High Contrast, Solid, Non-Blurry Add to Cart Button */
+/* Card Actions Container Uniformity */
+.woocommerce ul.products li.product .ct-woo-card-actions,
+.woocommerce-page ul.products li.product .ct-woo-card-actions,
+ul.products li.product .ct-woo-card-actions {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: auto !important;
+}
+
+/* Universal High Contrast, Solid Product Card Buttons (Add to cart, Out of stock, Select options) */
 .cung-product-tabs-wrapper ul.products li.product .button,
+.cung-product-tabs-wrapper ul.products li.product a.button,
 .cung-product-tabs-wrapper ul.products li.product .add_to_cart_button,
-.woocommerce ul.products li.product .button.add_to_cart_button {
+.cung-flashsale-wrapper ul.products li.product .button,
+.cung-flashsale-wrapper ul.products li.product a.button,
+.cung-card-action .button,
+.cung-card-action a.button,
+.woocommerce ul.products li.product .button,
+.woocommerce ul.products li.product a.button,
+.woocommerce ul.products li.product .ct-woo-card-actions .button,
+.woocommerce ul.products li.product .ct-woo-card-actions a.button,
+.woocommerce-page ul.products li.product .button,
+.woocommerce-page ul.products li.product a.button,
+ul.products li.product .button,
+ul.products li.product a.button,
+.ct-woo-card-actions .button,
+.ct-woo-card-actions a.button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
+  min-width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 44px !important;
   background-color: var(--theme-palette-color-1, #A94F65) !important;
   color: #ffffff !important;
   font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
@@ -457,11 +485,27 @@ ul.products li.product:hover {
   cursor: pointer !important;
   text-decoration: none !important;
   margin-top: auto !important;
+  text-align: center !important;
+  white-space: nowrap !important;
 }
 
 .cung-product-tabs-wrapper ul.products li.product .button:hover,
+.cung-product-tabs-wrapper ul.products li.product a.button:hover,
 .cung-product-tabs-wrapper ul.products li.product .add_to_cart_button:hover,
-.woocommerce ul.products li.product .button.add_to_cart_button:hover {
+.cung-flashsale-wrapper ul.products li.product .button:hover,
+.cung-flashsale-wrapper ul.products li.product a.button:hover,
+.cung-card-action .button:hover,
+.cung-card-action a.button:hover,
+.woocommerce ul.products li.product .button:hover,
+.woocommerce ul.products li.product a.button:hover,
+.woocommerce ul.products li.product .ct-woo-card-actions .button:hover,
+.woocommerce ul.products li.product .ct-woo-card-actions a.button:hover,
+.woocommerce-page ul.products li.product .button:hover,
+.woocommerce-page ul.products li.product a.button:hover,
+ul.products li.product .button:hover,
+ul.products li.product a.button:hover,
+.ct-woo-card-actions .button:hover,
+.ct-woo-card-actions a.button:hover {
   background-color: var(--theme-palette-color-2, #8F3F54) !important;
   color: #ffffff !important;
   opacity: 1 !important;
@@ -527,15 +571,51 @@ ul.products li.product:hover {
 }
 
 /* ==========================================================================
-   5. SHOP SIDEBAR POLISH (BLOCKSY NATIVE HARMONY)
+   5. SIDEBAR HARMONY (SHOP & NEWS/BLOG POLISH)
    ========================================================================== */
-aside#sidebar .widget_product_categories ul.product-categories {
+
+/* Consistent spacing and styling for all widgets in aside#sidebar */
+aside#sidebar .ct-widget {
+  margin-bottom: 28px !important;
+}
+
+/* Harmonized Widget Title Header with Brand Accent Line */
+aside#sidebar .widget-title,
+aside#sidebar .widgettitle {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid var(--theme-palette-color-7, #EFE9DF) !important;
+  position: relative !important;
+  display: block !important;
+  line-height: 1.3 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+aside#sidebar .widget-title::after,
+aside#sidebar .widgettitle::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 36px !important;
+  height: 2px !important;
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  border-radius: 2px !important;
+}
+
+/* Categories Widget (Products & Blog/News) */
+aside#sidebar :is(.widget_product_categories, .widget_categories) ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-aside#sidebar .widget_product_categories li.cat-item {
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -547,26 +627,127 @@ aside#sidebar .widget_product_categories li.cat-item {
   transition: all 0.2s ease !important;
 }
 
-aside#sidebar .widget_product_categories li.cat-item:hover {
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item:hover {
   background-color: var(--theme-palette-color-5, #F8F5F0) !important;
   border-color: var(--theme-palette-color-1, #A94F65) !important;
   transform: translateX(3px) !important;
 }
 
-aside#sidebar .widget_product_categories li.cat-item a {
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item a {
   color: var(--theme-palette-color-4, #3C2D31) !important;
   font-weight: 500 !important;
   font-size: 14px !important;
   text-decoration: none !important;
+  flex-grow: 1 !important;
 }
 
-aside#sidebar .widget_product_categories li.cat-item .count {
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item .count {
   background-color: var(--theme-palette-color-5, #F8F5F0) !important;
   color: var(--theme-palette-color-1, #A94F65) !important;
   font-size: 11px !important;
   font-weight: 600 !important;
   padding: 2px 8px !important;
   border-radius: 12px !important;
+  white-space: nowrap !important;
+  margin-left: 8px !important;
+}
+
+/* Active Category item */
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item.current-cat {
+  background-color: var(--theme-palette-color-5, #F8F5F0) !important;
+  border-color: var(--theme-palette-color-1, #A94F65) !important;
+}
+
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item.current-cat > a {
+  color: var(--theme-palette-color-1, #A94F65) !important;
+  font-weight: 600 !important;
+}
+
+aside#sidebar :is(.widget_product_categories, .widget_categories) li.cat-item.current-cat > .count {
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #FFFFFF !important;
+}
+
+/* Recent Posts Widget (News/Blog Sidebar) */
+aside#sidebar .widget_recent_entries ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+aside#sidebar .widget_recent_entries li {
+  display: block !important;
+  padding: 10px 12px !important;
+  margin-bottom: 6px !important;
+  border-radius: 6px !important;
+  background-color: var(--theme-palette-color-6, #FFFDF9) !important;
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
+  transition: all 0.2s ease !important;
+}
+
+aside#sidebar .widget_recent_entries li:hover {
+  background-color: var(--theme-palette-color-5, #F8F5F0) !important;
+  border-color: var(--theme-palette-color-1, #A94F65) !important;
+  transform: translateX(3px) !important;
+}
+
+aside#sidebar .widget_recent_entries li a {
+  display: block !important;
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  font-weight: 500 !important;
+  font-size: 13.5px !important;
+  line-height: 1.45 !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
+}
+
+aside#sidebar .widget_recent_entries li:hover a {
+  color: var(--theme-palette-color-1, #A94F65) !important;
+}
+
+aside#sidebar .widget_recent_entries li .post-date {
+  display: block !important;
+  font-size: 11.5px !important;
+  color: #8C7D82 !important;
+  margin-top: 5px !important;
+  font-weight: 400 !important;
+}
+
+/* Search Widget (News/Blog Sidebar) */
+aside#sidebar .widget_search .ct-search-form {
+  margin: 0 !important;
+}
+
+aside#sidebar .widget_search .ct-search-form-inner {
+  border: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
+  border-radius: 6px !important;
+  background-color: var(--theme-palette-color-6, #FFFDF9) !important;
+  transition: all 0.2s ease !important;
+  overflow: hidden !important;
+}
+
+aside#sidebar .widget_search .ct-search-form-inner:focus-within,
+aside#sidebar .widget_search .ct-search-form-inner:hover {
+  border-color: var(--theme-palette-color-1, #A94F65) !important;
+  box-shadow: 0 0 0 3px rgba(169, 79, 101, 0.1) !important;
+}
+
+aside#sidebar .widget_search input[type="search"] {
+  font-size: 13.5px !important;
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  padding: 9px 12px !important;
+  background: transparent !important;
+}
+
+aside#sidebar .widget_search button.wp-element-button {
+  color: var(--theme-palette-color-1, #A94F65) !important;
+  background: transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+aside#sidebar .widget_search button.wp-element-button:hover {
+  color: #7D3447 !important;
+  transform: scale(1.08) !important;
 }
 
 /* Price Filter Widget */
@@ -702,116 +883,209 @@ aside#sidebar .widget_price_filter .button {
   text-transform: none !important;
 }
 
-/* News Posts Grid Container (6c3c1dc) */
-.elementor-element.elementor-element-6c3c1dc {
-  margin-bottom: 80px !important;
+/* ==========================================================================
+   7. NEWS & BLOG GRID REDESIGN (PREMIUM FASHION MAGAZINE STYLE)
+   ========================================================================== */
+.elementor-element.elementor-element-6c3c1dc,
+.elementor-element-6c3c1dc {
+  margin-bottom: 70px !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc .entries {
+/* Ensure 3-column equal grid for home & shortcode, 2-column for blog archive with sidebar */
+.elementor-element-6c3c1dc .entries,
+.ct-posts-shortcode .entries {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 24px !important;
+  gap: 28px !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card {
+.blog .entries,
+.archive:not(.woocommerce) .entries {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 28px !important;
+}
+
+/* Luxury Card Container */
+.elementor-element-6c3c1dc article.entry-card,
+.ct-posts-shortcode article.entry-card,
+.blog article.entry-card,
+.archive:not(.woocommerce) article.entry-card {
   display: flex !important;
   flex-direction: column !important;
-  background-color: var(--theme-palette-color-8, #FFFFFF) !important;
-  border: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
-  border-radius: 12px !important;
-  padding: 16px !important;
+  background: #FFFFFF !important;
+  border: 1px solid #ECE6E4 !important;
+  border-radius: 16px !important;
+  padding: 0 !important; /* Full-bleed image across top */
+  margin: 0 !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 2px 8px rgba(60, 45, 49, 0.04) !important;
+  position: relative !important;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.35s ease !important;
+  box-shadow: 0 4px 18px rgba(60, 45, 49, 0.05) !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card:hover {
-  border-color: transparent !important;
-  box-shadow: 0 12px 30px rgba(60, 45, 49, 0.1) !important;
-  transform: translateY(-4px) !important;
+.elementor-element-6c3c1dc article.entry-card:hover,
+.ct-posts-shortcode article.entry-card:hover,
+.blog article.entry-card:hover,
+.archive:not(.woocommerce) article.entry-card:hover {
+  border-color: rgba(169, 79, 101, 0.35) !important;
+  box-shadow: 0 16px 36px rgba(169, 79, 101, 0.14) !important;
+  transform: translateY(-6px) !important;
 }
 
-/* News Image Container */
-.elementor-element.elementor-element-6c3c1dc article.entry-card .ct-media-container {
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  aspect-ratio: 16/10 !important;
-  margin-bottom: 14px !important;
+/* Image Container - 100% Full Width across top of card */
+.elementor-element-6c3c1dc article.entry-card .ct-media-container,
+.ct-posts-shortcode article.entry-card .ct-media-container,
+.blog article.entry-card .ct-media-container,
+.archive:not(.woocommerce) article.entry-card .ct-media-container,
+.elementor-element-6c3c1dc article.entry-card .boundless-image,
+.ct-posts-shortcode article.entry-card .boundless-image,
+.blog article.entry-card .boundless-image,
+.archive:not(.woocommerce) article.entry-card .boundless-image {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  height: 220px !important;
+  flex: none !important;
   display: block !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 16px 16px 0 0 !important;
+  aspect-ratio: auto !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card .ct-media-container img {
+/* Full Bleed Image with Smooth Zoom on Hover */
+.elementor-element-6c3c1dc article.entry-card .ct-media-container img,
+.ct-posts-shortcode article.entry-card .ct-media-container img,
+.blog article.entry-card .ct-media-container img,
+.archive:not(.woocommerce) article.entry-card .ct-media-container img {
   width: 100% !important;
   height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
   object-fit: cover !important;
-  transition: transform 0.4s ease !important;
+  object-position: center !important;
+  display: block !important;
+  aspect-ratio: auto !important;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card:hover .ct-media-container img {
-  transform: scale(1.05) !important;
+.elementor-element-6c3c1dc article.entry-card:hover .ct-media-container img,
+.ct-posts-shortcode article.entry-card:hover .ct-media-container img,
+.blog article.entry-card:hover .ct-media-container img,
+.archive:not(.woocommerce) article.entry-card:hover .ct-media-container img {
+  transform: scale(1.08) !important;
 }
 
-/* News Category Tag */
-.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] {
-  margin: 0 0 10px 0 !important;
+/* Floating Category Badge over Image */
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"],
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_1"],
+.blog article.entry-card ul.entry-meta[data-id="meta_1"],
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_1"] {
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  z-index: 5 !important;
+  margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
   display: flex !important;
-  align-items: center !important;
+  pointer-events: auto !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a {
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a,
+.blog article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a {
   display: inline-block !important;
   font-size: 11px !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  color: var(--theme-palette-color-1, #A94F65) !important;
-  background-color: var(--theme-palette-color-5, #F8F5F0) !important;
-  padding: 4px 10px !important;
+  letter-spacing: 0.6px !important;
+  color: #A94F65 !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  padding: 5px 13px !important;
   border-radius: 20px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12) !important;
   text-decoration: none !important;
-  transition: all 0.2s ease !important;
+  transition: all 0.25s ease !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a:hover {
-  background-color: var(--theme-palette-color-1, #A94F65) !important;
-  color: #ffffff !important;
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a:hover,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a:hover,
+.blog article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a:hover,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_1"] li.meta-categories a:hover {
+  background: #A94F65 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
 }
 
-/* News Title */
-.elementor-element.elementor-element-6c3c1dc article.entry-card h2.entry-title {
+/* Card Body Content */
+.elementor-element-6c3c1dc article.entry-card .card-content,
+.ct-posts-shortcode article.entry-card .card-content,
+.blog article.entry-card .card-content,
+.archive:not(.woocommerce) article.entry-card .card-content {
+  padding: 22px 22px 18px 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  background: #FFFFFF !important;
+  box-sizing: border-box !important;
+}
+
+/* Post Title */
+.elementor-element-6c3c1dc article.entry-card h2.entry-title,
+.ct-posts-shortcode article.entry-card h2.entry-title,
+.blog article.entry-card h2.entry-title,
+.archive:not(.woocommerce) article.entry-card h2.entry-title {
   font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
-  font-size: 16px !important;
+  font-size: 16.5px !important;
   font-weight: 700 !important;
   line-height: 1.45 !important;
   margin: 0 0 10px 0 !important;
-}
-
-.elementor-element.elementor-element-6c3c1dc article.entry-card h2.entry-title a {
-  color: var(--theme-palette-color-4, #3C2D31) !important;
-  text-decoration: none !important;
-  transition: color 0.2s ease !important;
+  min-height: 48px !important;
   display: -webkit-box !important;
   -webkit-line-clamp: 2 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card:hover h2.entry-title a {
-  color: var(--theme-palette-color-1, #A94F65) !important;
+.elementor-element-6c3c1dc article.entry-card h2.entry-title a,
+.ct-posts-shortcode article.entry-card h2.entry-title a,
+.blog article.entry-card h2.entry-title a,
+.archive:not(.woocommerce) article.entry-card h2.entry-title a {
+  color: #3C2D31 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
 }
 
-/* News Excerpt */
-.elementor-element.elementor-element-6c3c1dc article.entry-card .entry-excerpt {
-  margin: 0 0 14px 0 !important;
+.elementor-element-6c3c1dc article.entry-card:hover h2.entry-title a,
+.ct-posts-shortcode article.entry-card:hover h2.entry-title a,
+.blog article.entry-card:hover h2.entry-title a,
+.archive:not(.woocommerce) article.entry-card:hover h2.entry-title a {
+  color: #A94F65 !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card .entry-excerpt p {
-  font-size: 13px !important;
+/* Post Excerpt */
+.elementor-element-6c3c1dc article.entry-card .entry-excerpt,
+.ct-posts-shortcode article.entry-card .entry-excerpt,
+.blog article.entry-card .entry-excerpt,
+.archive:not(.woocommerce) article.entry-card .entry-excerpt {
+  margin: 0 0 16px 0 !important;
+}
+
+.elementor-element-6c3c1dc article.entry-card .entry-excerpt p,
+.ct-posts-shortcode article.entry-card .entry-excerpt p,
+.blog article.entry-card .entry-excerpt p,
+.archive:not(.woocommerce) article.entry-card .entry-excerpt p {
+  font-size: 13.5px !important;
   line-height: 1.6 !important;
-  color: var(--theme-palette-color-3, #66585B) !important;
+  color: #6D5C60 !important;
   margin: 0 !important;
   display: -webkit-box !important;
   -webkit-line-clamp: 2 !important;
@@ -819,35 +1093,118 @@ aside#sidebar .widget_price_filter .button {
   overflow: hidden !important;
 }
 
-/* News Footer Meta (Date, Comments) */
-.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] {
-  margin-top: auto !important;
-  padding-top: 10px !important;
-  border-top: 1px solid var(--theme-palette-color-7, #EFE9DF) !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  font-size: 12px !important;
-  color: var(--theme-palette-color-3, #8A7B7E) !important;
+/* Meta Footer: Hide author and comments, show clean Date + "Đọc tiếp →" */
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-author,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-author,
+.blog article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-author,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-author,
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-comments,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-comments,
+.blog article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-comments,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-comments {
+  display: none !important;
 }
 
-.elementor-element.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] a {
-  color: var(--theme-palette-color-3, #8A7B7E) !important;
-  text-decoration: none !important;
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"],
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"],
+.blog article.entry-card ul.entry-meta[data-id="meta_2"],
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"] {
+  margin-top: auto !important;
+  padding-top: 14px !important;
+  border-top: 1px solid #F0EAE8 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date,
+.blog article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date {
+  font-size: 12.5px !important;
+  color: #8C7D82 !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date time,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date time,
+.blog article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date time,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"] li.meta-date time {
+  color: #8C7D82 !important;
+}
+
+/* Elegant "Đọc tiếp →" CTA */
+.elementor-element-6c3c1dc article.entry-card ul.entry-meta[data-id="meta_2"]::after,
+.ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"]::after,
+.blog article.entry-card ul.entry-meta[data-id="meta_2"]::after,
+.archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"]::after {
+  content: "Đọc tiếp →" !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #A94F65 !important;
+  transition: transform 0.22s ease, color 0.22s ease !important;
+}
+
+.elementor-element-6c3c1dc article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after,
+.ct-posts-shortcode article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after,
+.blog article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after,
+.archive:not(.woocommerce) article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after {
+  transform: translateX(4px) !important;
+  color: #8E3E52 !important;
+}
+
+/* "Tất cả tin tức" button header polish */
+.elementor-element.elementor-element-4fa9448 .elementor-button {
+  background-color: transparent !important;
+  color: #A94F65 !important;
+  border: 1.5px solid #A94F65 !important;
+  border-radius: 24px !important;
+  padding: 8px 22px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  transition: all 0.25s ease !important;
+  box-shadow: none !important;
+}
+
+.elementor-element.elementor-element-4fa9448 .elementor-button:hover {
+  background-color: #A94F65 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(169, 79, 101, 0.25) !important;
+}
+
+/* "Tin Tức" heading polish */
+.elementor-element.elementor-element-7658406 h3.elementor-heading-title {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: #3C2D31 !important;
+  letter-spacing: -0.3px !important;
 }
 
 /* Responsive Media Queries for News */
 @media (max-width: 1024px) {
-  .elementor-element.elementor-element-6c3c1dc .entries {
+  .elementor-element-6c3c1dc .entries,
+  .ct-posts-shortcode .entries {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 16px !important;
+    gap: 20px !important;
   }
 }
 
 @media (max-width: 689px) {
-  .elementor-element.elementor-element-6c3c1dc .entries {
+  .elementor-element-6c3c1dc .entries,
+  .ct-posts-shortcode .entries {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    gap: 18px !important;
+  }
+
+  .elementor-element-6c3c1dc article.entry-card .ct-media-container,
+  .ct-posts-shortcode article.entry-card .ct-media-container {
+    height: 190px !important;
   }
 }
 
@@ -886,42 +1243,164 @@ aside#sidebar .widget_price_filter .button {
 }
 
 /* ==========================================================================
-   10. HERO AUTO-SLIDESHOW ROTATOR WITH FULL-FRAME COVER & CONTROLS
+   HEADER FROSTED GLASS TRANSLUCENCY ("MỜ TRONG TRONG" GLASSMORPHISM)
    ========================================================================== */
-.elementor-element.elementor-element-e06974b {
-  position: relative !important;
-  overflow: visible !important;
-  background-image: none !important;
+header#header.ct-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  background: rgba(255, 253, 249, 0.78) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(240, 222, 226, 0.6) !important;
+  box-shadow: 0 4px 20px rgba(60, 45, 49, 0.04) !important;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease !important;
 }
 
+header#header.ct-header [data-device="desktop"],
+header#header.ct-header [data-device="mobile"],
+header#header.ct-header [data-row],
+header#header.ct-header [data-row="middle"],
+header#header.ct-header [data-row="top"],
+header#header.ct-header [data-row="bottom"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* Offset when WP Admin Bar is present */
+.admin-bar header#header.ct-header {
+  top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar header#header.ct-header {
+    top: 46px !important;
+  }
+}
+
+/* ==========================================================================
+   10. HERO BANNER - FULL VIEWPORT WIDTH & COMPLETE CONTAINER COVERAGE
+   ========================================================================== */
+
+/* Outer Section: Stretch 100% across the full computer screen width */
+.elementor-element.elementor-element-f47e99a {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+.elementor-element.elementor-element-f47e99a > .e-con-inner {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+}
+
+/* Container e06974b: Takes full screen width & acts as relative positioning anchor */
+.elementor-element.elementor-element-e06974b {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 580px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 50px 0 45px 0 !important;
+  margin: 0 !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Inner Centered Content Box (Headline, Buttons, and Commitment Cards) */
 .elementor-element.elementor-element-e06974b > .e-con-inner {
   position: relative !important;
-  z-index: 2 !important;
-}
-
-/* Slideshow Card Container */
-.cung-hero-slideshow {
-  z-index: 10 !important;
+  z-index: 5 !important;
+  max-width: 1240px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
-  pointer-events: auto !important;
-  position: relative !important;
+  justify-content: space-between !important;
+  pointer-events: none !important; /* Allow clicks on open photo areas to trigger slide link */
 }
 
-/* The Frame that houses the slides */
+/* Re-enable pointer events for interactive content inside e-con-inner */
+.elementor-element.elementor-element-e06974b > .e-con-inner > * {
+  pointer-events: auto !important;
+}
+
+/* Hero Background Slideshow: Covers 100% of e06974b (Full Width & Height of Section) */
+.cung-hero-slideshow {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: auto !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Slides Container Frame */
 .cung-hero-slides-inner {
   position: relative !important;
   width: 100% !important;
   height: 100% !important;
-  border-radius: 24px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: #F8F5F0 !important;
   overflow: hidden !important;
-  background: #F5EBEB !important;
-  box-shadow: 0 16px 40px rgba(60, 45, 49, 0.1) !important;
-  border: 1px solid rgba(240, 222, 226, 0.8) !important;
 }
 
-/* The Slide Image - BAO PHỦ TOÀN BỘ KHUNG (COVER) */
+/* Protective gradient overlay: preserves text contrast on the left, clear view of models on the right */
+.cung-hero-slides-inner::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+/* Desktop: Smooth horizontal gradient overlay */
+@media (min-width: 1025px) {
+  .cung-hero-slides-inner::after {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 253, 249, 0.96) 0%,
+      rgba(255, 253, 249, 0.90) 30%,
+      rgba(255, 253, 249, 0.55) 52%,
+      rgba(255, 253, 249, 0.15) 75%,
+      rgba(255, 253, 249, 0.0) 100%
+    ) !important;
+  }
+}
+
+/* Tablet & Mobile: Smooth vertical gradient overlay */
+@media (max-width: 1024px) {
+  .cung-hero-slides-inner::after {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 253, 249, 0.96) 0%,
+      rgba(255, 253, 249, 0.88) 32%,
+      rgba(255, 253, 249, 0.45) 65%,
+      rgba(255, 253, 249, 0.1) 100%
+    ) !important;
+  }
+}
+
+/* Individual Slide Image: Covers entire background */
 .cung-hero-slide {
   position: absolute !important;
   top: 0 !important;
@@ -929,18 +1408,29 @@ aside#sidebar .widget_price_filter .button {
   width: 100% !important;
   height: 100% !important;
   background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: cover !important; /* Phủ kín toàn bộ khung */
+  background-position: right center !important;
+  background-size: cover !important;
+  border-radius: 0 !important;
   opacity: 0;
-  transform: scale(1.04);
+  transform: scale(1.03);
   transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  border-radius: 24px !important;
 }
 
-/* Chế độ contain nếu người dùng chọn trong Admin */
+@media (min-width: 1440px) {
+  .cung-hero-slide {
+    background-position: 70% center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .cung-hero-slide {
+    background-position: center center !important;
+  }
+}
+
 .cung-hero-slideshow.fit-contain .cung-hero-slide {
   background-size: contain !important;
-  background-color: #FAF4F0 !important;
+  background-position: right center !important;
 }
 
 .cung-hero-slide.is-active {
@@ -958,23 +1448,83 @@ aside#sidebar .widget_price_filter .button {
   cursor: pointer !important;
 }
 
-/* Floating Glassmorphism Controls (Dots & Arrows) */
+/* Left Content Column (Title, Tagline, Buttons) */
+.elementor-element.elementor-element-125e13c {
+  position: relative !important;
+  z-index: 6 !important;
+  max-width: 580px !important;
+  width: 100% !important;
+  padding: 20px 0 10px 0 !important;
+  min-height: auto !important;
+  background: transparent !important;
+}
+
+.elementor-element.elementor-element-125e13c h1.elementor-heading-title {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 46px !important;
+  font-weight: 700 !important;
+  color: var(--theme-palette-color-4, #3C2D31) !important;
+  line-height: 1.25 !important;
+  margin: 12px 0 24px 0 !important;
+  letter-spacing: -0.5px !important;
+}
+
+@media (max-width: 768px) {
+  .elementor-element.elementor-element-125e13c h1.elementor-heading-title {
+    font-size: 32px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+.elementor-element.elementor-element-125e13c .elementor-widget-text-editor p {
+  font-family: var(--theme-font-family, 'Be Vietnam Pro', sans-serif) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--theme-palette-color-1, #8F3F54) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+}
+
+/* Buttons Container inside 125e13c */
+.elementor-element.elementor-element-fdc0098 {
+  margin-top: 10px !important;
+}
+
+/* Commitment Cards at the Bottom (7fbce90) - Ultra-Frosted Glass */
+.elementor-element.elementor-element-7fbce90,
+.ct-frosted-glass {
+  position: relative !important;
+  z-index: 6 !important;
+  margin-top: 40px !important;
+  width: 100% !important;
+  background: rgba(255, 253, 249, 0.88) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 10px 32px rgba(60, 45, 49, 0.08) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.elementor-element.elementor-element-7fbce90:hover {
+  box-shadow: 0 14px 40px rgba(60, 45, 49, 0.12) !important;
+}
+
+/* Floating Controls (Dots & Arrows) */
 .cung-hero-controls {
   position: absolute !important;
-  bottom: 18px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 30 !important;
+  z-index: 25 !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 10px !important;
   background: rgba(255, 253, 249, 0.9) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(14px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
   padding: 6px 14px !important;
   border-radius: 30px !important;
-  box-shadow: 0 4px 20px rgba(60, 45, 49, 0.16) !important;
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(60, 45, 49, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
   pointer-events: auto !important;
 }
 
@@ -1021,61 +1571,31 @@ aside#sidebar .widget_price_filter .button {
   box-shadow: 0 2px 6px rgba(143, 63, 84, 0.35) !important;
 }
 
-/* --- DESKTOP LAYOUT (min-width: 1025px) --- */
+/* Control Positioning */
 @media (min-width: 1025px) {
-  .cung-hero-slideshow {
-    position: absolute !important;
-    top: 25px !important;
-    right: 3% !important;
-    width: 46% !important;
-    height: 450px !important;
-  }
-
-  .cung-hero-slides-inner {
-    height: 100% !important;
+  .cung-hero-controls {
+    bottom: 145px !important;
+    right: max(32px, calc((100vw - 1240px) / 2 + 32px)) !important;
+    left: auto !important;
+    transform: none !important;
   }
 }
 
-/* --- TABLET & MOBILE LAYOUT (max-width: 1024px) --- */
 @media (max-width: 1024px) {
-  .cung-hero-slideshow {
-    position: relative !important;
-    top: auto !important;
-    right: auto !important;
-    width: 100% !important;
-    height: 380px !important;
-    margin: 25px 0 35px !important;
-  }
-
-  .cung-hero-slides-inner {
-    height: 100% !important;
-    border-radius: 20px !important;
-  }
-
-  .cung-hero-slide {
-    border-radius: 20px !important;
+  .elementor-element.elementor-element-e06974b {
+    min-height: 520px !important;
+    padding: 35px 0 25px 0 !important;
   }
 
   .cung-hero-controls {
-    bottom: 14px !important;
+    bottom: 16px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
   }
 }
 
 @media (max-width: 689px) {
-  .cung-hero-slideshow {
-    height: 320px !important;
-    margin: 15px 0 25px !important;
-    border-radius: 16px !important;
-  }
-
-  .cung-hero-slides-inner {
-    border-radius: 16px !important;
-  }
-
-  .cung-hero-slide {
-    border-radius: 16px !important;
-  }
-
   .cung-hero-controls {
     bottom: 12px !important;
     padding: 4px 10px !important;
@@ -1530,4 +2050,517 @@ body.cung-cart-open {
   background-color: #8F3F54 !important;
   border-color: #8F3F54 !important;
   box-shadow: 0 4px 14px rgba(143, 63, 84, 0.3) !important;
+}
+
+
+/* ==========================================================================
+   7. SIZE GUIDE MODAL & TRIGGER BUTTON (CƯNG STORE)
+   ========================================================================== */
+.cung-size-guide-btn-wrap {
+  margin: 14px 0 18px 0;
+}
+
+.cung-btn-size-guide {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background-color: rgba(169, 79, 101, 0.08) !important;
+  color: #A94F65 !important;
+  border: 1px dashed #A94F65 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+}
+
+.cung-btn-size-guide:hover {
+  background-color: #A94F65 !important;
+  color: #FFFDF9 !important;
+  border-style: solid !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(169, 79, 101, 0.25) !important;
+}
+
+.cung-btn-size-guide svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Modal Backdrop */
+.cung-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: rgba(30, 20, 25, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cung-modal-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Dialog */
+.cung-modal-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%) scale(0.96);
+  width: 680px;
+  max-width: 92vw;
+  max-height: 90vh;
+  max-height: 90dvh;
+  background-color: #FFFDF9;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(60, 45, 49, 0.25);
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cung-modal-dialog.is-open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.cung-modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow: hidden;
+}
+
+/* Modal Header */
+.cung-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 28px 16px 28px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgba(169, 79, 101, 0.12);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cung-modal-badge {
+  display: inline-block;
+  background-color: rgba(169, 79, 101, 0.1);
+  color: #A94F65;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+
+.cung-modal-title {
+  margin: 0 0 4px 0 !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: #3C2D31 !important;
+  line-height: 1.3 !important;
+}
+
+.cung-modal-desc {
+  margin: 0 !important;
+  font-size: 13px !important;
+  color: #6D5C60 !important;
+}
+
+.cung-modal-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6D5C60;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.cung-modal-close:hover {
+  background-color: rgba(169, 79, 101, 0.1);
+  color: #A94F65;
+  transform: rotate(90deg);
+}
+
+/* Modal Tabs Navigation */
+.cung-size-tabs-nav {
+  display: flex;
+  background-color: #F8F4F0;
+  padding: 6px;
+  gap: 6px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(169, 79, 101, 0.08);
+}
+
+.cung-size-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #6D5C60;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cung-size-tab-btn:hover {
+  color: #A94F65;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.cung-size-tab-btn.is-active {
+  background-color: #A94F65;
+  color: #FFFDF9;
+  box-shadow: 0 2px 8px rgba(169, 79, 101, 0.3);
+}
+
+/* Modal Body */
+.cung-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px;
+}
+
+.cung-modal-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cung-modal-body::-webkit-scrollbar-thumb {
+  background-color: rgba(169, 79, 101, 0.25);
+  border-radius: 4px;
+}
+
+.cung-size-tab-panel {
+  display: none;
+}
+
+.cung-size-tab-panel.is-active {
+  display: block;
+  animation: cungFadeIn 0.25s ease-in-out;
+}
+
+@keyframes cungFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Size Table */
+.cung-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.cung-size-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 0 !important;
+  font-size: 13.5px !important;
+  background-color: #FFFFFF !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(60, 45, 49, 0.05) !important;
+}
+
+.cung-size-table thead th {
+  background-color: rgba(169, 79, 101, 0.08) !important;
+  color: #A94F65 !important;
+  font-weight: 700 !important;
+  padding: 12px 14px !important;
+  text-align: left !important;
+  border-bottom: 2px solid rgba(169, 79, 101, 0.15) !important;
+  font-size: 13px !important;
+  white-space: nowrap !important;
+}
+
+.cung-size-table tbody tr {
+  border-bottom: 1px solid rgba(60, 45, 49, 0.06) !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.cung-size-table tbody tr:last-child {
+  border-bottom: none !important;
+}
+
+.cung-size-table tbody tr:hover {
+  background-color: rgba(169, 79, 101, 0.04) !important;
+}
+
+.cung-size-table tbody td {
+  padding: 11px 14px !important;
+  color: #3C2D31 !important;
+  font-size: 13.5px !important;
+}
+
+.cung-size-tag {
+  display: inline-block;
+  background-color: rgba(169, 79, 101, 0.1);
+  color: #A94F65;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Size Tips */
+.cung-size-tips {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cung-size-tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: rgba(169, 79, 101, 0.06);
+  border-left: 3px solid #A94F65;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: #3C2D31;
+  line-height: 1.45;
+}
+
+.cung-tip-icon {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Modal Footer */
+.cung-modal-footer {
+  padding: 14px 28px;
+  background-color: #FFFFFF;
+  border-top: 1px solid rgba(169, 79, 101, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cung-modal-footer-note {
+  font-size: 13px;
+  color: #6D5C60;
+  font-weight: 500;
+}
+
+.cung-btn-consult-zalo {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--theme-palette-color-1, #A94F65) !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.22s ease !important;
+  box-shadow: 0 2px 8px rgba(169, 79, 101, 0.28) !important;
+}
+
+.cung-btn-consult-zalo:hover {
+  background-color: var(--theme-palette-color-2, #8E3E52) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(169, 79, 101, 0.38) !important;
+}
+
+/* ==========================================================================
+   8. FLOATING CONTACT WIDGET (ZALO, HOTLINE, MESSENGER)
+   ========================================================================== */
+.cung-floating-contact {
+  position: fixed;
+  bottom: 26px;
+  right: 24px;
+  z-index: 99990;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: auto;
+}
+
+.cung-contact-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none !important;
+}
+
+.cung-contact-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
+  overflow: hidden;
+}
+
+.cung-contact-item:hover .cung-contact-icon {
+  transform: scale(1.12);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.28);
+}
+
+/* Pulse ring */
+.cung-contact-pulse {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  z-index: 1;
+  animation: cungPulseRing 2.2s infinite;
+  pointer-events: none;
+}
+
+@keyframes cungPulseRing {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* Individual Channel Styles */
+/* Zalo */
+.cung-contact-zalo .cung-contact-icon {
+  background-color: #0068FF;
+}
+
+.cung-contact-zalo .cung-contact-pulse {
+  border: 2px solid #0068FF;
+}
+
+/* Phone / Hotline */
+.cung-contact-phone .cung-contact-icon {
+  background: linear-gradient(135deg, #A94F65, #D46A84);
+}
+
+.cung-contact-phone .cung-contact-pulse {
+  border: 2px solid #A94F65;
+}
+
+.cung-phone-ringing svg {
+  animation: cungPhoneShake 1.8s infinite;
+}
+
+@keyframes cungPhoneShake {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(-18deg); }
+  20%, 40% { transform: rotate(18deg); }
+  50% { transform: rotate(0deg); }
+}
+
+/* Messenger */
+.cung-contact-messenger .cung-contact-icon {
+  background: linear-gradient(135deg, #00B2FF, #006AFF, #9B51E0);
+}
+
+.cung-contact-messenger .cung-contact-pulse {
+  border: 2px solid #00B2FF;
+}
+
+/* Slide-out Tooltip Label */
+.cung-contact-label {
+  position: absolute;
+  right: 64px;
+  background-color: #3C2D31;
+  color: #FFFDF9;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: all 0.22s ease;
+  pointer-events: none;
+}
+
+.cung-contact-label::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid #3C2D31;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.cung-contact-item:hover .cung-contact-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Responsive adjustment for Mobile */
+@media (max-width: 600px) {
+  .cung-floating-contact {
+    bottom: 20px;
+    right: 16px;
+    gap: 10px;
+  }
+
+  .cung-contact-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .cung-contact-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cung-modal-header {
+    padding: 18px 20px 14px 20px;
+  }
+
+  .cung-modal-body {
+    padding: 16px 20px;
+  }
+
+  .cung-size-tab-btn {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
 }

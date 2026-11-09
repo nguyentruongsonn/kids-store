@@ -92,6 +92,8 @@ define( 'WP_DEBUG', false );
  * remote requests. Do not execute the queue during a visitor request.
  */
 define( 'DISABLE_WP_CRON', true );
+define( 'WP_HTTP_BLOCK_EXTERNAL', true );
+define( 'WP_ACCESSIBLE_HOSTS', 'localhost,127.0.0.1,api.payos.vn,api.telegram.org,api.wordpress.org,downloads.wordpress.org' );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
