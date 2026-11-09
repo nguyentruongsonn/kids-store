@@ -1143,7 +1143,7 @@ aside#sidebar .widget_price_filter .button {
 .ct-posts-shortcode article.entry-card ul.entry-meta[data-id="meta_2"]::after,
 .blog article.entry-card ul.entry-meta[data-id="meta_2"]::after,
 .archive:not(.woocommerce) article.entry-card ul.entry-meta[data-id="meta_2"]::after {
-  content: "Đọc tiếp →" !important;
+  content: "Đọc tiếp" !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   color: #A94F65 !important;
@@ -1154,7 +1154,7 @@ aside#sidebar .widget_price_filter .button {
 .ct-posts-shortcode article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after,
 .blog article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after,
 .archive:not(.woocommerce) article.entry-card:hover ul.entry-meta[data-id="meta_2"]::after {
-  transform: translateX(4px) !important;
+  /* transform removed */
   color: #8E3E52 !important;
 }
 

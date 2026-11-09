@@ -255,12 +255,77 @@
       });
   }
 
+  /**
+   * Kids Fashion Size Guide Modal Interactions
+   */
+  function initSizeGuide() {
+    var $modal = $('#cung-size-guide-modal');
+    var $backdrop = $('#cung-size-guide-backdrop');
+
+    if (!$modal.length) return;
+
+    function openSizeModal() {
+      $modal.addClass('is-open').attr('aria-hidden', 'false');
+      $backdrop.addClass('is-active').attr('aria-hidden', 'false');
+      $('body').addClass('cung-modal-open');
+    }
+
+    function closeSizeModal() {
+      $modal.removeClass('is-open').attr('aria-hidden', 'true');
+      $backdrop.removeClass('is-active').attr('aria-hidden', 'true');
+      $('body').removeClass('cung-modal-open');
+    }
+
+    // Open button
+    $(document).off('click.cungSizeOpen', '#cung-btn-size-guide')
+      .on('click.cungSizeOpen', '#cung-btn-size-guide', function (e) {
+        e.preventDefault();
+        openSizeModal();
+      });
+
+    // Close button
+    $(document).off('click.cungSizeClose', '#cung-size-guide-close')
+      .on('click.cungSizeClose', '#cung-size-guide-close', function (e) {
+        e.preventDefault();
+        closeSizeModal();
+      });
+
+    // Backdrop click
+    $(document).off('click.cungSizeBackdrop', '#cung-size-guide-backdrop')
+      .on('click.cungSizeBackdrop', '#cung-size-guide-backdrop', function (e) {
+        e.preventDefault();
+        closeSizeModal();
+      });
+
+    // ESC key
+    $(document).off('keydown.cungSizeEsc')
+      .on('keydown.cungSizeEsc', function (e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+          if ($modal.hasClass('is-open')) {
+            closeSizeModal();
+          }
+        }
+      });
+
+    // Tab switching
+    $modal.off('click.cungSizeTab', '.cung-size-tab-btn')
+      .on('click.cungSizeTab', '.cung-size-tab-btn', function (e) {
+        e.preventDefault();
+        var targetId = $(this).data('tab');
+        $modal.find('.cung-size-tab-btn').removeClass('is-active');
+        $(this).addClass('is-active');
+        $modal.find('.cung-size-tab-panel').removeClass('is-active');
+        $modal.find('#' + targetId).addClass('is-active');
+      });
+  }
+
   // Document ready
   $(document).ready(function () {
     initCountdown();
     initTabs();
     initHeroSlideshow();
     initSideCart();
+    initSizeGuide();
   });
 
   // Elementor Frontend Hook (for live preview in Elementor Editor)

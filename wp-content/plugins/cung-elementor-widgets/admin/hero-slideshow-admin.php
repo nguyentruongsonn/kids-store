@@ -20,13 +20,22 @@ class Cung_Hero_Slideshow_Admin {
 
     public function add_menu() {
         add_menu_page(
-            __('Quản lý Hero Slideshow', 'cung-widgets'),
-            __('Cưng Slideshow', 'cung-widgets'),
+            __('Cài đặt Cưng Store', 'cung-widgets'),
+            __('Cưng Store', 'cung-widgets'),
             'manage_options',
             'cung-hero-slideshow',
             [$this, 'render_page'],
-            'dashicons-images-alt2',
+            'dashicons-store',
             25
+        );
+
+        add_submenu_page(
+            'cung-hero-slideshow',
+            __('Hero Slideshow', 'cung-widgets'),
+            __('Hero Slideshow', 'cung-widgets'),
+            'manage_options',
+            'cung-hero-slideshow',
+            [$this, 'render_page']
         );
     }
 

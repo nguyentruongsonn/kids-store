@@ -31,6 +31,9 @@ final class Cung_Elementor_Widgets_Extension {
         require_once __DIR__ . '/admin/hero-slideshow-admin.php';
         new \Cung_Hero_Slideshow_Admin();
 
+        require_once __DIR__ . '/admin/contact-settings-admin.php';
+        new \Cung_Contact_Settings_Admin();
+
         require_once __DIR__ . '/includes/telegram-notifier.php';
         new \Cung_Telegram_Notifier();
 
@@ -38,7 +41,12 @@ final class Cung_Elementor_Widgets_Extension {
         new \Cung_Telegram_Admin();
 
         require_once __DIR__ . '/side-cart-and-menu.php';
+        require_once __DIR__ . '/size-guide.php';
+        require_once __DIR__ . '/floating-contact.php';
         require_once __DIR__ . '/includes/policy-sidebar.php';
+        require_once __DIR__ . '/includes/news-sidebar.php';
+        require_once __DIR__ . '/includes/acf-product-details.php';
+        require_once __DIR__ . '/includes/multilingual-footer.php';
 
         add_action('init', [$this, 'i18n']);
         add_action('plugins_loaded', [$this, 'init']);
