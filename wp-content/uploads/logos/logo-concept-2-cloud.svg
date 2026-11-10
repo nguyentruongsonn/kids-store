@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" width="320" height="90">
+  <defs>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFF5F7"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD385"/>
+      <stop offset="100%" stop-color="#EAA66B"/>
+    </linearGradient>
+    <linearGradient id="roseBerryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A94F65"/>
+      <stop offset="100%" stop-color="#8F3F54"/>
+    </linearGradient>
+    <filter id="softCloudShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#A94F65" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Left Mascot: Smiling Cloud Hugging Warm Sun & Sprout -->
+  <g transform="translate(8, 8)">
+    <!-- Warm Sun Peeking Behind Cloud -->
+    <g transform="translate(48, 22)">
+      <!-- Sun Rays -->
+      <line x1="0" y1="-14" x2="0" y2="-19" stroke="#EAA66B" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="10" y1="-10" x2="14" y2="-14" stroke="#EAA66B" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="14" y1="0" x2="19" y2="0" stroke="#EAA66B" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="10" y1="10" x2="14" y2="14" stroke="#EAA66B" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Sun Body -->
+      <circle cx="0" cy="0" r="13" fill="url(#sunGrad)"/>
+    </g>
+
+    <!-- Fluffy Baby Cloud -->
+    <path d="M 22 55 
+             A 12 12 0 0 1 20 34 
+             A 16 16 0 0 1 44 26 
+             A 18 18 0 0 1 66 38 
+             A 13 13 0 0 1 64 55 
+             Z" 
+          fill="url(#cloudGrad)" 
+          stroke="#A94F65" 
+          stroke-width="2.4" 
+          stroke-linejoin="round"
+          filter="url(#softCloudShadow)"/>
+
+    <!-- Happy Sleeping Eyes on Cloud -->
+    <path d="M 30 42 Q 34 46 38 42" fill="none" stroke="#3C2D31" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M 44 42 Q 48 46 52 42" fill="none" stroke="#3C2D31" stroke-width="2.2" stroke-linecap="round"/>
+
+    <!-- Rosy Cloud Cheeks -->
+    <circle cx="27" cy="46" r="3.2" fill="#F8BAC6" opacity="0.9"/>
+    <circle cx="55" cy="46" r="3.2" fill="#F8BAC6" opacity="0.9"/>
+
+    <!-- Sweet Cloud Smile -->
+    <path d="M 39 46 Q 41 49 43 46" fill="none" stroke="#A94F65" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Little Green Sprout on top of Cloud (Natural/Organic) -->
+    <g transform="translate(38, 20)">
+      <path d="M 0 6 C -4 1 0 -5 5 -1 C 2 3 1 5 0 6 Z" fill="#8BB174"/>
+      <path d="M 0 6 C 4 2 8 -2 5 -5 C 2 -4 0 2 0 6 Z" fill="#719859"/>
+    </g>
+  </g>
+
+  <!-- Right Typography: "Cưng Store" & "ORGANIC KIDS FASHION" -->
+  <g transform="translate(94, 0)">
+    <text x="0" y="52" 
+          font-family="'Be Vietnam Pro', 'Quicksand', sans-serif" 
+          font-size="40" 
+          font-weight="800" 
+          letter-spacing="-0.3" 
+          fill="url(#roseBerryGrad)">Cưng Store</text>
+
+    <!-- Subtitle: ORGANIC KIDS FASHION -->
+    <text x="2" y="72" 
+          font-family="'Be Vietnam Pro', 'Montserrat', sans-serif" 
+          font-size="10.5" 
+          font-weight="700" 
+          letter-spacing="2.8" 
+          fill="#3C2D31" 
+          opacity="0.85">THỜI TRANG CHO BÉ</text>
+
+    <!-- Star / Heart Deco -->
+    <polygon points="145,69 146.5,72 150,72.5 147.5,74.5 148,78 145,76 142,78 142.5,74.5 140,72.5 143.5,72" fill="#EAA66B"/>
+  </g>
+</svg>

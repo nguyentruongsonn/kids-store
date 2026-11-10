@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" width="320" height="90">
+  <defs>
+    <linearGradient id="cungPinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A94F65"/>
+      <stop offset="100%" stop-color="#8F3F54"/>
+    </linearGradient>
+    <linearGradient id="softEarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBEFF2"/>
+      <stop offset="100%" stop-color="#F3D4DC"/>
+    </linearGradient>
+    <filter id="softGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#A94F65" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Left Mascot: Adorable Baby Bunny with Ribbon Bow -->
+  <g transform="translate(8, 8)">
+    <!-- Mascot Background Pill -->
+    <circle cx="37" cy="37" r="36" fill="#FFFDF9" stroke="#EAD5DA" stroke-width="2" filter="url(#softGlow)"/>
+
+    <!-- Left Bunny Ear -->
+    <path d="M 24 32 C 16 12 22 2 30 8 C 36 14 34 26 31 34 Z" fill="#FFFDF9" stroke="#A94F65" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M 25 28 C 20 14 24 7 28 11 C 32 15 31 24 29 29 Z" fill="url(#softEarGrad)"/>
+
+    <!-- Right Bunny Ear (Cute Tip Fold) -->
+    <path d="M 44 33 C 44 14 54 4 60 10 C 65 16 57 26 51 34 Z" fill="#FFFDF9" stroke="#A94F65" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M 47 29 C 48 16 54 9 58 13 C 61 17 55 24 51 30 Z" fill="url(#softEarGrad)"/>
+
+    <!-- Bunny Head -->
+    <ellipse cx="37" cy="45" rx="23" ry="19" fill="#FFFDF9" stroke="#A94F65" stroke-width="2.2"/>
+
+    <!-- Sweet Peaceful Eyes -->
+    <path d="M 26 42 Q 30 46 34 42" fill="none" stroke="#3C2D31" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M 40 42 Q 44 46 48 42" fill="none" stroke="#3C2D31" stroke-width="2.2" stroke-linecap="round"/>
+
+    <!-- Rosy Cheeks -->
+    <ellipse cx="23" cy="47" rx="4" ry="2.6" fill="#F8BAC6" opacity="0.9"/>
+    <ellipse cx="51" cy="47" rx="4" ry="2.6" fill="#F8BAC6" opacity="0.9"/>
+
+    <!-- Tiny Heart Nose -->
+    <path d="M 37 45.8 C 35.8 44.5 34.2 45.6 35.2 47 L 37 49 L 38.8 47 C 39.8 45.6 38.2 44.5 37 45.8 Z" fill="#A94F65"/>
+
+    <!-- Cute Smiling Mouth -->
+    <path d="M 37 49 Q 37 51.5 34 52.2 M 37 49 Q 37 51.5 40 52.2" fill="none" stroke="#3C2D31" stroke-width="1.8" stroke-linecap="round"/>
+
+    <!-- Cute Bow Tie -->
+    <g transform="translate(37, 65)">
+      <path d="M 0 0 L -8 -4 L -8 4 Z" fill="#A94F65"/>
+      <path d="M 0 0 L 8 -4 L 8 4 Z" fill="#A94F65"/>
+      <circle cx="0" cy="0" r="2.8" fill="#8F3F54"/>
+    </g>
+  </g>
+
+  <!-- Right Typography: "Cưng" & "KIDS BOUTIQUE" -->
+  <g transform="translate(94, 0)">
+    <!-- Brand Wordmark: Cưng -->
+    <text x="0" y="52" 
+          font-family="'Quicksand', 'Comfortaa', 'Be Vietnam Pro', sans-serif" 
+          font-size="44" 
+          font-weight="800" 
+          letter-spacing="-0.5" 
+          fill="url(#cungPinkGrad)">Cưng</text>
+
+    <!-- Little Heart Accent above letter 'g' -->
+    <path d="M 112 21 C 110.5 19 107.5 20.8 109.2 23 L 112 26 L 114.8 23 C 116.5 20.8 113.5 19 112 21 Z" fill="#E892A2"/>
+
+    <!-- Subtitle: KIDS BOUTIQUE -->
+    <text x="2" y="72" 
+          font-family="'Montserrat', 'Be Vietnam Pro', sans-serif" 
+          font-size="10.5" 
+          font-weight="700" 
+          letter-spacing="3.2" 
+          fill="#3C2D31" 
+          opacity="0.85">KIDS BOUTIQUE</text>
+
+    <!-- Elegant Separator Dot -->
+    <circle cx="120" cy="69" r="2" fill="#A94F65" opacity="0.6"/>
+
+    <!-- Sub-label -->
+    <text x="128" y="72" 
+          font-family="'Montserrat', 'Be Vietnam Pro', sans-serif" 
+          font-size="9" 
+          font-weight="600" 
+          letter-spacing="2" 
+          fill="#8F3F54" 
+          opacity="0.8">EST. 2026</text>
+  </g>
+</svg>

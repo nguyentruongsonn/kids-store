@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 68" width="240" height="68">
+  <defs>
+    <linearGradient id="cungTextGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A94F65"/>
+      <stop offset="100%" stop-color="#803347"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#A94F65" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Wordmark: CƯNG -->
+  <text x="6" y="52" 
+        font-family="'Be Vietnam Pro', 'Quicksand', 'Montserrat', sans-serif" 
+        font-size="50" 
+        font-weight="900" 
+        letter-spacing="0.5" 
+        fill="url(#cungTextGrad)"
+        filter="url(#softShadow)">CƯNG</text>
+
+  <!-- Top-Right Pill Badge: Kids -->
+  <g transform="translate(170, 14)">
+    <!-- Pill Background -->
+    <rect x="0" y="0" width="56" height="22" rx="11" fill="rgba(169, 79, 101, 0.12)" stroke="#A94F65" stroke-width="1.2"/>
+    <!-- Kids Text -->
+    <text x="28" y="15" 
+          font-family="'Be Vietnam Pro', 'Quicksand', sans-serif" 
+          font-size="12" 
+          font-weight="700" 
+          letter-spacing="1" 
+          fill="#A94F65" 
+          text-anchor="middle">Kids</text>
+  </g>
+
+  <!-- Tiny Sweet Heart Accent on corner -->
+  <path d="M 162 20 C 160.8 18.5 158.2 20 159.8 21.8 L 162 24 L 164.2 21.8 C 165.8 20 163.2 18.5 162 20 Z" fill="#E892A2"/>
+</svg>

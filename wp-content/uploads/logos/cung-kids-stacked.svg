@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 70" width="210" height="70">
+  <defs>
+    <linearGradient id="stackedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A94F65"/>
+      <stop offset="100%" stop-color="#803347"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wordmark: CƯNG -->
+  <text x="6" y="44" 
+        font-family="'Be Vietnam Pro', 'Quicksand', 'Montserrat', sans-serif" 
+        font-size="46" 
+        font-weight="900" 
+        letter-spacing="1" 
+        fill="url(#stackedGrad)">CƯNG</text>
+
+  <!-- Small word: K I D S (Right aligned under NG) -->
+  <text x="100" y="63" 
+        font-family="'Montserrat', 'Be Vietnam Pro', sans-serif" 
+        font-size="12" 
+        font-weight="700" 
+        letter-spacing="5" 
+        fill="#3C2D31" 
+        opacity="0.85">KIDS</text>
+
+  <!-- Delicate accent heart on Ư hook -->
+  <path d="M 64 6 C 63 4.5 61 5.5 62 7 L 64 9 L 66 7 C 67 5.5 65 4.5 64 6 Z" fill="#E892A2"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 65" width="220" height="65">
+  <defs>
+    <linearGradient id="cungBerryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A94F65"/>
+      <stop offset="100%" stop-color="#803347"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wordmark: CƯNG -->
+  <text x="4" y="50" 
+        font-family="'Comfortaa', 'Be Vietnam Pro', 'Quicksand', sans-serif" 
+        font-size="48" 
+        font-weight="900" 
+        letter-spacing="0.5" 
+        fill="url(#cungBerryGrad)">CƯNG</text>
+
+  <!-- Small word: Kids (placed gracefully at the top-right of CƯNG) -->
+  <text x="164" y="24" 
+        font-family="'Quicksand', 'Montserrat', 'Be Vietnam Pro', sans-serif" 
+        font-size="16" 
+        font-weight="700" 
+        letter-spacing="1" 
+        fill="#3C2D31">Kids</text>
+
+  <!-- Sweet tiny heart dot beside Kids -->
+  <path d="M 204 14 C 203 12.8 201 13.8 202 15.2 L 204 17 L 206 15.2 C 207 13.8 205 12.8 204 14 Z" fill="#E892A2"/>
+</svg>
