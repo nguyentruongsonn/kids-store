@@ -116,6 +116,8 @@ class Blocksy_Translations_Manager {
 				if (
 					$single_hero_component['id'] === 'custom_meta'
 					&&
+					isset($single_hero_component['meta_elements'])
+					&&
 					is_array($single_hero_component['meta_elements'])
 				) {
 					foreach ($single_hero_component['meta_elements'] as $single_meta_element) {
